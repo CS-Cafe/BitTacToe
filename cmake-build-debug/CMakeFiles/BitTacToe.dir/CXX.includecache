@@ -6,9 +6,15 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/evcmo/CLionProjects/BitTacToe/main.cpp
+C:/Users/evcmo/CLionProjects/BitTacToe/Board.h
 iostream
 -
 cassert
 -
+
+C:/Users/evcmo/CLionProjects/BitTacToe/main.cpp
+ostream
+-
+Board.h
+C:/Users/evcmo/CLionProjects/BitTacToe/Board.h
 

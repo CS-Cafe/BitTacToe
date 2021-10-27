@@ -9,6 +9,8 @@
 
 namespace bit {
 
+    constexpr uint8_t BoardLength = 9;
+
     /**
      * Bitboards representing the
      * individual squares of the
@@ -25,15 +27,23 @@ namespace bit {
      * special endgame information
      * for quick access.
      */
-    constexpr uint64_t Magic[] = {
-            18410856566090662016ULL,
-            18442427945024793216ULL,
-            18432248665600721024ULL,
-            18445805644813216384ULL,
-            18445320140295405696ULL,
-            18445331136759114368ULL,
-            18446446041347555456ULL,
-            18446744073709551615ULL
+    constexpr uint8_t Magic[] = {
+            128, 128, 128, 128,
+            128, 128, 128, 255,
+            128, 170, 240, 250,
+            128, 170, 240, 255,
+            128, 128, 204, 204,
+            128, 128, 204, 255,
+            128, 170, 252, 254,
+            128, 170, 252, 255,
+            128, 128, 170, 170,
+            240, 240, 250, 255,
+            128, 170, 250, 250,
+            240, 250, 250, 255,
+            128, 128, 238, 238,
+            240, 240, 254, 255,
+            255, 255, 255, 255,
+            255, 255, 255, 255
     };
 
     /**
@@ -78,9 +88,23 @@ namespace bit {
     }
 
     /**
-     * The alliances, enumerated.
+     * A mapping from Alliance to character
+     * representation.
+     */
+    constexpr char AllianceToChar[] { 'X', 'O' };
+
+    /**
+     * The Alliances, enumerated.
      */
     enum Alliance : uint8_t { X, O };
+
+    /**
+     * Complement overload.
+     * @param a the Alliance to take the complement of
+     * @return the complement of the given Alliance
+     */
+    constexpr Alliance operator~(const Alliance a)
+    { return Alliance(a ^ X ^ O); }
 
     /**
      * @class <b><i>Board</i></b>
@@ -122,7 +146,7 @@ namespace bit {
         template<Alliance A, int I>
         constexpr void mark() {
             static_assert(A == 0 || A == 1);
-            static_assert(I >= 0 && I < 9);
+            static_assert(I >= 0 && I < BoardLength);
             A == X? bbx ^= Squares[I]: bbo ^= Squares[I];
         }
 
@@ -136,7 +160,7 @@ namespace bit {
         template<Alliance A>
         constexpr void mark(const int i) {
             static_assert(A == 0 || A == 1);
-            assert(i >= 0 && i < 9);
+            assert(i >= 0 && i < BoardLength);
             A == X? bbx ^= Squares[i]: bbo ^= Squares[i];
         }
 
@@ -149,7 +173,7 @@ namespace bit {
         */
         constexpr void mark(const Alliance a, const int i) {
             assert(a == 0 || a == 1);
-            assert(i >= 0 && i < 9);
+            assert(i >= 0 && i < BoardLength);
             a == X? bbx ^= Squares[i]: bbo ^= Squares[i];
         }
 
@@ -169,9 +193,9 @@ namespace bit {
             // this board and intersect with a mask
             // with a single high bit at an index based on
             // this board. The resulting sixty-four bit
-            // number will either be zero or an unsigned
-            // integer. Use this value as the bool.
-            return (Magic[t >> 6U] & (1ULL << (t & 63ULL)));
+            // number will either be zero or a non-negative
+            // integer.
+            return (Magic[t >> 3U] & (1U << (t & 7U)));
         }
 
         /**
@@ -186,7 +210,7 @@ namespace bit {
             assert(a == 0 || a == 1);
             const uint64_t t = a == X? bbx: bbo;
             // See overload.
-            return (Magic[t >> 6U] & (1ULL << (t & 63ULL)));
+            return (Magic[t >> 3U] & (1U << (t & 7U)));
         }
 
         /**
@@ -207,13 +231,13 @@ namespace bit {
             char buff[9];
             for(char
                 * d = buff,
-                * c = buff + 9;
+                * c = buff + BoardLength;
                     d < c;) *d++ = '-';
             for(; p; p &= p - 1)
                 buff[bitScanFwd(p)] = 'x';
             for(; q; q &= q - 1)
                 buff[bitScanFwd(q)] = 'o';
-            for(int i = 0; i < 9; ++i) {
+            for(int i = 0; i < BoardLength; ++i) {
                 if(i % 3 == 0)
                     out << '\n';
                 out << buff[i] << ' ';
