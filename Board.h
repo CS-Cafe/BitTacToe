@@ -91,15 +91,15 @@ namespace bit {
         uint16_t bbx;
 
         /**
-         * The bitboard belonging to Y.
+         * The bitboard belonging to O.
          */
-        uint16_t bby;
+        uint16_t bbo;
     public:
 
         /**
          * A public constructor for a Board.
          */
-        constexpr Board() : bbx(0), bby(0)
+        constexpr Board() : bbx(0), bbo(0)
         { }
 
         /**
@@ -113,7 +113,7 @@ namespace bit {
         constexpr void mark() {
             static_assert(A == 0 || A == 1);
             static_assert(I >= 0 && I < 9);
-            A == X? bbx ^= Squares[I]: bby ^= Squares[I];
+            A == X? bbx ^= Squares[I]: bbo ^= Squares[I];
         }
 
         /**
@@ -127,7 +127,7 @@ namespace bit {
         constexpr void mark(const int i) {
             static_assert(A == 0 || A == 1);
             assert(i >= 0 && i < 9);
-            A == X? bbx ^= Squares[i]: bby ^= Squares[i];
+            A == X? bbx ^= Squares[i]: bbo ^= Squares[i];
         }
 
         /**
@@ -140,7 +140,7 @@ namespace bit {
         constexpr void mark(const Alliance a, const int i) {
             assert(a == 0 || a == 1);
             assert(i >= 0 && i < 9);
-            a == X? bbx ^= Squares[i]: bby ^= Squares[i];
+            a == X? bbx ^= Squares[i]: bbo ^= Squares[i];
         }
 
         /**
@@ -154,7 +154,7 @@ namespace bit {
         template<Alliance A>
         constexpr bool hasVictory() {
             static_assert(A == 0 || A == 1);
-            const uint64_t t = A == X? bbx: bby;
+            const uint64_t t = A == X? bbx: bbo;
             // Get the magic constant that corresponds to
             // this board and intersect with a mask
             // with a single high bit at an index based on
@@ -174,7 +174,7 @@ namespace bit {
          */
         constexpr bool hasVictory(const Alliance a) {
             assert(a == 0 || a == 1);
-            const uint64_t t = a == X? bbx: bby;
+            const uint64_t t = a == X? bbx: bbo;
             // See overload.
             return (Magic[t >> 6U] & (1ULL << (t & 63ULL)));
         }
@@ -185,7 +185,7 @@ namespace bit {
          * @return whether this board is full.
          */
         constexpr bool isFull()
-        { return ((bbx | bby) & 0x01FF) == 0x01FF; }
+        { return ((bbx | bbo) & 0x01FF) == 0x01FF; }
 
         /**
          * Insertion overload.
@@ -193,7 +193,7 @@ namespace bit {
         friend std::ostream&
         operator<<(std::ostream& out, const Board& b) {
             uint16_t p = b.bbx;
-            uint16_t q = b.bby;
+            uint16_t q = b.bbo;
             char buff[9];
             for(char
                 * d = buff,
