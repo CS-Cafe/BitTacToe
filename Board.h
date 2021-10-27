@@ -2,6 +2,7 @@
 // Created by evcmo on 10/26/2021.
 //
 
+#pragma once
 #ifndef BITTACTOE_BOARD_H
 #define BITTACTOE_BOARD_H
 #include <iostream>
@@ -25,7 +26,8 @@ namespace bit {
     /**
      * Magic bitmaps that contain
      * special endgame information
-     * for quick access.
+     * for quick access. 512 bits.
+     * (64 bytes.)
      */
     constexpr uint8_t Magic[] = {
             128, 128, 128, 128,
