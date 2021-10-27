@@ -82,6 +82,16 @@ namespace bit {
      */
     enum Alliance : uint8_t { X, O };
 
+    /**
+     * @class <b><i>Board</i></b>
+     *
+     * <p>
+     * A tic-tac-toe board.
+     *
+     * @authors Ellie Moore
+     * @authors ...YourNameHere...
+     * @version 10.26.2021
+     */
     class Board final {
     private:
 
