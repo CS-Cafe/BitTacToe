@@ -1,0 +1,3 @@
+C:/Users/evcmo/CLionProjects/BitTacToe/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/evcmo/CLionProjects/BitTacToe/cmake-build-debug/CMakeFiles/BitTacToe.dir
+C:/Users/evcmo/CLionProjects/BitTacToe/cmake-build-debug/CMakeFiles/rebuild_cache.dir

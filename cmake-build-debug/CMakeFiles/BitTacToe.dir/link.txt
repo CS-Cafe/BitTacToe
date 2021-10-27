@@ -1,0 +1,3 @@
+"C:\Program Files\JetBrains\CLion 2021.2.1\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\BitTacToe.dir/objects.a
+C:\MinGW\bin\ar.exe cr CMakeFiles\BitTacToe.dir/objects.a @CMakeFiles\BitTacToe.dir\objects1.rsp
+C:\MinGW\bin\g++.exe -g -Wl,--whole-archive CMakeFiles\BitTacToe.dir/objects.a -Wl,--no-whole-archive -o BitTacToe.exe -Wl,--out-implib,libBitTacToe.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\BitTacToe.dir\linklibs.rsp
