@@ -1,0 +1,5 @@
+CC = clang++
+CFLAGS = -std=c++23 -O3 -Wall -DNDEBUG -march=native
+
+bit: main.cpp
+	$(CC) $(CFLAGS) -o $@ $^
