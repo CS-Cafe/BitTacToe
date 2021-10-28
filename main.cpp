@@ -1,4 +1,5 @@
 #include <ostream>
+#include <ctime>
 #include "Board.h"
 #include "Opponent.h"
 
@@ -34,9 +35,15 @@ int main() {
                 continue;
             b.mark<O>(i - 1);
             if(b.isFull()) break;
+            const long start = clock();
             b.mark<X>(opponent::chooseMove(&b));
+            const long end = clock() - start;
             cout << "\033[2J\033[H" << flush;
             cout << b;
+            printf(
+                "I took %.6f seconds!",
+                ((double)end) / CLOCKS_PER_SEC
+            );
         }
         cout << '\n'
                   << (x? "I win!":
