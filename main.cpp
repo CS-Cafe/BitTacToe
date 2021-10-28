@@ -21,14 +21,17 @@ int main() {
         while(!b.isFull() &&
               !(x = b.hasVictory<X>()) &&
               !(o = b.hasVictory<O>())) {
-            std::cout << "\nMake a move (0-8)\n"
-                      << "8 7 6\n"
-                      << "5 4 3\n"
-                      << "2 1 0\n>>_";
-            scanf("%d", &i);
-            if(i < 0 || i > 8 || b.occupiedSquare(i))
+            std::cout << "\nMake a move (1-9)\n"
+                      << "9 7 8\n"
+                      << "6 5 4\n"
+                      << "3 2 1\n>>_";
+            while(!(std::cin >> i)) {
+                std::cin.clear();
+                std::cin.ignore(INT32_MAX,'\n');
+            }
+            if(i < 1 || i > 9 || b.occupiedSquare(i - 1))
                 continue;
-            b.mark<O>(i);
+            b.mark<O>(i - 1);
             if(b.isFull()) break;
             b.mark<X>(opponent::chooseMove(&b));
             std::cout << "\033[2J\033[H" << flush;
@@ -40,8 +43,10 @@ int main() {
                          "Tie!")
                   << "\nplay again? (y/n)\n>>_";
         b.reset();
-        scanf("%c", &c);
-        scanf("%c", &c);
+        while(!(std::cin >> c)) {
+            std::cin.clear();
+            std::cin.ignore(INT32_MAX,'\n');
+        }
     } while(c == 'y');
     return 0;
 }
