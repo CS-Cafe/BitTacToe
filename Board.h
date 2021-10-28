@@ -28,10 +28,10 @@ namespace bit {
      * individual indexes of a magic
      * bitmap.
      */
-    constexpr uint16_t Index[] = {
-            0x0001, 0x0002, 0x0004,
-            0x0008, 0x0010, 0x0020,
-            0x0040, 0x0080,
+    constexpr uint8_t Index[] = {
+            0x01, 0x02, 0x04,
+            0x08, 0x10, 0x20,
+            0x40, 0x80,
     };
 
     /**
