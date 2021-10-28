@@ -83,6 +83,9 @@
 		<Unit filename="C:/Users/evcmo/CLionProjects/BitTacToe/Board.h">
 			<Option target="BitTacToe"/>
 		</Unit>
+		<Unit filename="C:/Users/evcmo/CLionProjects/BitTacToe/Opponent.h">
+			<Option target="BitTacToe"/>
+		</Unit>
 		<Unit filename="C:/Users/evcmo/CLionProjects/BitTacToe/main.cpp">
 			<Option target="BitTacToe"/>
 		</Unit>

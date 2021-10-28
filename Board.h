@@ -181,13 +181,13 @@ namespace bit {
         }
 
         [[nodiscard]]
-        constexpr bool freeSquare(const int i) {
+        constexpr bool freeSquare(const int i) const {
             assert(i >= 0 && i < BoardLength);
             return !((bbx | bbo) & Squares[i]);
         }
 
         [[nodiscard]]
-        constexpr bool fullSquare(const int i) {
+        constexpr bool fullSquare(const int i) const {
             assert(i >= 0 && i < BoardLength);
             return ((bbx | bbo) & Squares[i]);
         }
