@@ -159,7 +159,7 @@ namespace bit {
          */
         template<Alliance A, int I>
         constexpr void mark() {
-            static_assert(A == 0 || A == 1);
+            static_assert(A == X || A == O);
             static_assert(I >= 0 && I < BoardLength);
             A == X? bbx ^= Squares[I]: bbo ^= Squares[I];
         }
@@ -173,7 +173,7 @@ namespace bit {
         */
         template<Alliance A>
         constexpr void mark(const int i) {
-            static_assert(A == 0 || A == 1);
+            static_assert(A == X || A == O);
             assert(i >= 0 && i < BoardLength);
             A == X? bbx ^= Squares[i]: bbo ^= Squares[i];
         }
@@ -216,7 +216,7 @@ namespace bit {
          */
         template<Alliance A>
         constexpr bool hasVictory() {
-            static_assert(A == 0 || A == 1);
+            static_assert(A == X || A == O);
             const uint64_t t = A == X? bbx: bbo;
             // Get the magic constant that corresponds to
             // this board and intersect with a mask
@@ -235,7 +235,7 @@ namespace bit {
          * @return whether the alliance has three in a row
          */
         constexpr bool hasVictory(const Alliance a) {
-            assert(a == 0 || a == 1);
+            assert(a == X || a == O);
             const uint64_t t = a == X? bbx: bbo;
             // See overload.
             return Magic[t >> 3U] & Index[t & 7U];
@@ -256,7 +256,7 @@ namespace bit {
         operator<<(std::ostream& out, const Board& b) {
             uint16_t p = b.bbx;
             uint16_t q = b.bbo;
-            char buff[9];
+            char buff[BoardLength];
             for(char
                 * d = buff,
                 * c = buff + BoardLength;
