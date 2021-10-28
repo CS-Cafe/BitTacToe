@@ -23,7 +23,7 @@ int main() {
               !(x = b.hasVictory<X>()) &&
               !(o = b.hasVictory<O>())) {
             cout << "\nMake a move (1-9)\n"
-                      << "9 7 8\n"
+                      << "9 8 7\n"
                       << "6 5 4\n"
                       << "3 2 1\n>>_";
             while(!(cin >> i)) {

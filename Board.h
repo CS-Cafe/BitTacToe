@@ -243,7 +243,7 @@ namespace bit {
             // containing a single high bit. The resulting
             // sixty-four bit number will either be zero
             // or a non-negative integer.
-            return Magic[t >> 3U] & Index[t & 7U];
+            return Magic[t >> 3U] & (1ULL << (t & 7ULL));
         }
 
         /**
@@ -258,7 +258,7 @@ namespace bit {
             assert(a == X || a == O);
             const uint64_t t = a == X? bbx: bbo;
             // See overload.
-            return Magic[t >> 3U] & Index[t & 7U];
+            return Magic[t >> 3U] & (1ULL << (t & 7ULL));
         }
 
         /**
