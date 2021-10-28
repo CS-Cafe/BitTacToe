@@ -15,6 +15,9 @@ namespace opponent {
 
     constexpr int HIGH_SCORE = 10;
 
+    /*
+     * TODO: ADD HASHING !!! 
+     */
     namespace {
 
         template<bool MAX>
