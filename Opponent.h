@@ -13,13 +13,58 @@ namespace opponent {
     using bit::X;
     using bit::O;
 
-    template<bool>
-    int AlphaOmega(Board*, int, int, int);
-
     constexpr int HIGH_SCORE = 10;
 
+    namespace {
+
+        template<bool MAX>
+        inline int alphaOmega(Board *const b,
+                              const int depth,
+                              int a,
+                              int o) {
+
+            // Maximizer (computer) wins.
+            if (b->hasVictory<X>())
+                return HIGH_SCORE - depth;
+            // Minimizer (user) wins.
+            if (b->hasVictory<O>())
+                return depth - HIGH_SCORE;
+            // Tie !
+            if (b->isFull()) return 0;
+
+            int score = MAX ? INT8_MIN : INT8_MAX;
+            for (int i = 0; i < BoardLength; ++i) {
+                if (b->fullSquare(i))
+                    continue;
+                if (MAX) {
+                    b->mark<X>(i);
+                    score = std::max(score,
+                        alphaOmega<false>(
+                            b, depth + 1,
+                            a, o
+                            )
+                    );
+                    b->mark<X>(i);
+                    a = score;
+                } else {
+                    b->mark<O>(i);
+                    score = std::min(score,
+                        alphaOmega<true>(
+                            b, depth + 1,
+                            a, o
+                        )
+                    );
+                    b->mark<O>(i);
+                    o = score;
+                }
+                if (a >= o) return score;
+            }
+            return score;
+        }
+    }
+
     /**
-     * Opponent
+     * Choose Move
      *
      * <p>
      * This Tic-Tac-Toe opponent uses miniMax to calculate the best move.
@@ -66,7 +111,7 @@ namespace opponent {
             if (b->fullSquare(i)) continue;
             b->mark<X>(i);
             currentScore =
-                AlphaOmega<false>(
+                alphaOmega<false>(
                     b, 0,
                     INT8_MIN, INT8_MAX
                 );
@@ -77,51 +122,6 @@ namespace opponent {
             }
         }
         return bestMove;
-    }
-
-    template<bool MAX>
-    inline int AlphaOmega(Board *const b,
-                   const int depth,
-                   int a,
-                   int o) {
-
-        // Maximizer (computer) wins.
-        if (b->hasVictory<X>())
-            return HIGH_SCORE - depth;
-        // Minimizer (user) wins.
-        if (b->hasVictory<O>())
-            return depth - HIGH_SCORE;
-        // Tie !
-        if (b->isFull()) return 0;
-
-        int score = MAX? INT8_MIN: INT8_MAX;
-        for (int i = 0; i < BoardLength; ++i) {
-            if (b->fullSquare(i))
-                continue;
-            if(MAX) {
-                b->mark<X>(i);
-                score = std::max(score,
-                    AlphaOmega<false>(
-                        b, depth + 1,
-                        a, o
-                    )
-                );
-                b->mark<X>(i);
-                a = score;
-            } else {
-                b->mark<O>(i);
-                score = std::min(score,
-                    AlphaOmega<true>(
-                        b, depth + 1,
-                        a, o
-                    )
-                );
-                b->mark<O>(i);
-                o = score;
-            }
-            if (a >= o) return score;
-        }
-        return score;
     }
 }
 

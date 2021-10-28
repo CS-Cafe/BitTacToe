@@ -141,7 +141,6 @@ namespace bit {
          * The bitboard belonging to O.
          */
         uint16_t bbo;
-
     public:
 
         /**
