@@ -87,13 +87,11 @@ namespace opponent {
         // Tie !
         if (b->isFull()) return 0;
 
-        int score;
-        if (MAX) {
-            score = INT8_MIN;
-            for (int i = 0;
-                 i < BoardLength; ++i) {
-                if (b->fullSquare(i))
-                    continue;
+        int score = MAX? INT8_MIN: INT8_MAX;
+        for (int i = 0; i < BoardLength; ++i) {
+            if (b->fullSquare(i))
+                continue;
+            if(MAX) {
                 b->mark<X>(i);
                 score = std::max(score,
                     AlphaOmega<false>(
@@ -103,14 +101,7 @@ namespace opponent {
                 );
                 b->mark<X>(i);
                 a = score;
-                if (a >= o) return score;
-            }
-        } else {
-            score = INT8_MAX;
-            for (int i = 0;
-                 i < BoardLength; ++i) {
-                if (b->fullSquare(i))
-                    continue;
+            } else {
                 b->mark<O>(i);
                 score = std::min(score,
                     AlphaOmega<true>(
@@ -120,8 +111,8 @@ namespace opponent {
                 );
                 b->mark<O>(i);
                 o = score;
-                if (a >= o) return score;
             }
+            if (a >= o) return score;
         }
         return score;
     }
