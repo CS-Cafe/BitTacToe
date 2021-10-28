@@ -24,6 +24,17 @@ namespace bit {
     };
 
     /**
+     * Bitboards representing the
+     * individual indexes of a magic
+     * bitmap.
+     */
+    constexpr uint16_t Index[] = {
+            0x0001, 0x0002, 0x0004,
+            0x0008, 0x0010, 0x0020,
+            0x0040, 0x0080,
+    };
+
+    /**
      * Magic bitmaps that contain
      * special endgame information
      * for quick access. 512 bits.
@@ -212,7 +223,7 @@ namespace bit {
             // containing a single high bit. The resulting
             // sixty-four bit number will either be zero
             // or a non-negative integer.
-            return (Magic[t >> 3U] & (1U << (t & 7U)));
+            return Magic[t >> 3U] & Index[t & 7U];
         }
 
         /**
@@ -227,7 +238,7 @@ namespace bit {
             assert(a == 0 || a == 1);
             const uint64_t t = a == X? bbx: bbo;
             // See overload.
-            return (Magic[t >> 3U] & (1U << (t & 7U)));
+            return Magic[t >> 3U] & Index[t & 7U];
         }
 
         /**
