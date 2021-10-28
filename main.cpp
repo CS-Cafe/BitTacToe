@@ -118,10 +118,15 @@ namespace opponent {
     }
 }
 
+/**
+ * I wrote this in 5 minutes... It needs lots of
+ * work. A GUI would be awesome!
+ *
+ * @return
+ */
 int main() {
     Board b; char c; int i = -1; bool x, o;
     do {
-        c = ' ';
         while(!b.isFull() &&
               !(x = b.hasVictory<X>()) &&
               !(o = b.hasVictory<O>())) {
