@@ -5,6 +5,7 @@
 using namespace bit;
 using namespace opponent;
 using std::cout;
+using std::flush;
 
 /**
  * I wrote this in 5 minutes... It needs lots of
@@ -15,6 +16,8 @@ using std::cout;
 int main() {
     Board b; char c; int i = -1; bool x, o;
     do {
+        std::cout << "\033[2J\033[H" << flush;
+        std::cout << b;
         while(!b.isFull() &&
               !(x = b.hasVictory<X>()) &&
               !(o = b.hasVictory<O>())) {
@@ -26,10 +29,10 @@ int main() {
             if(i < 0 || i > 8 || b.occupiedSquare(i))
                 continue;
             b.mark<O>(i);
-            std::cout << "\nYour move:\n" << b << '\n';
             if(b.isFull()) break;
             b.mark<X>(opponent::chooseMove(&b));
-            std::cout << "My move:\n" << b << '\n';
+            std::cout << "\033[2J\033[H" << flush;
+            std::cout << b;
         }
         std::cout << '\n'
                   << (x? "I win!":

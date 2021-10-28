@@ -191,18 +191,38 @@ namespace bit {
             a == X? bbx ^= Squares[i]: bbo ^= Squares[i];
         }
 
+        /**
+         * A method to check if the square at a given
+         * index is empty.
+         *
+         * @param i the index
+         * @return whether the square at a given index
+         * is empty
+         */
         [[maybe_unused]] [[nodiscard]]
         constexpr bool emptySquare(const int i) const {
             assert(i >= 0 && i < BoardLength);
             return !((bbx | bbo) & Squares[i]);
         }
 
+        /**
+         * A method to check if the square at a given
+         * index is occupied.
+         *
+         * @param i the index
+         * @return whether the square at a given index
+         * is occupied
+         */
         [[nodiscard]]
         constexpr bool occupiedSquare(const int i) const {
             assert(i >= 0 && i < BoardLength);
             return ((bbx | bbo) & Squares[i]);
         }
 
+        /**
+         * A method to reset this board to its empty
+         * state.
+         */
         constexpr void reset()
         { bbx = bbo = 0; }
 
@@ -257,20 +277,22 @@ namespace bit {
         operator<<(std::ostream& out, const Board& b) {
             uint16_t p = b.bbx;
             uint16_t q = b.bbo;
-            char buff[BoardLength];
+            char u[BoardLength];
             for(char
-                * d = buff,
-                * c = buff + BoardLength;
+                * d = u,
+                * c = u + BoardLength;
                     d < c;) *d++ = '-';
             for(; p; p &= p - 1)
-                buff[bitScanFwd(p)] = 'x';
+                u[bitScanFwd(p)] = 'x';
             for(; q; q &= q - 1)
-                buff[bitScanFwd(q)] = 'o';
-            for(int i = 0; i < BoardLength; ++i) {
-                if(i % 3 == 0)
-                    out << '\n';
-                out << buff[i] << ' ';
-            }
+                u[bitScanFwd(q)] = 'o';
+            out << "\n "
+                << u[0] << " | " << u[1] << " | " << u[2]
+                << "\n---+---+---\n "
+                << u[3] << " | " << u[4] << " | " << u[5]
+                << "\n---+---+---\n "
+                << u[6] << " | " << u[7] << " | " << u[8]
+                << '\n';
             return out;
         }
     }; // class Board

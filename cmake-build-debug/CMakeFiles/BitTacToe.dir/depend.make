@@ -3,4 +3,5 @@
 
 CMakeFiles/BitTacToe.dir/main.cpp.obj: \
  ../Board.h \
+ ../Opponent.h \
  ../main.cpp
