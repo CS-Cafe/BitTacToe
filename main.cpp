@@ -5,6 +5,7 @@
 using namespace bit;
 using namespace opponent;
 using std::cout;
+using std::cin;
 using std::flush;
 
 /**
@@ -16,36 +17,36 @@ using std::flush;
 int main() {
     Board b; char c; int i = -1; bool x, o;
     do {
-        std::cout << "\033[2J\033[H" << flush;
-        std::cout << b;
+        cout << "\033[2J\033[H" << flush;
+        cout << b;
         while(!b.isFull() &&
               !(x = b.hasVictory<X>()) &&
               !(o = b.hasVictory<O>())) {
-            std::cout << "\nMake a move (1-9)\n"
+            cout << "\nMake a move (1-9)\n"
                       << "9 7 8\n"
                       << "6 5 4\n"
                       << "3 2 1\n>>_";
-            while(!(std::cin >> i)) {
-                std::cin.clear();
-                std::cin.ignore(INT32_MAX,'\n');
+            while(!(cin >> i)) {
+                cin.clear();
+                cin.ignore(INT32_MAX,'\n');
             }
             if(i < 1 || i > 9 || b.occupiedSquare(i - 1))
                 continue;
             b.mark<O>(i - 1);
             if(b.isFull()) break;
             b.mark<X>(opponent::chooseMove(&b));
-            std::cout << "\033[2J\033[H" << flush;
-            std::cout << b;
+            cout << "\033[2J\033[H" << flush;
+            cout << b;
         }
-        std::cout << '\n'
+        cout << '\n'
                   << (x? "I win!":
                       o? "You win!":
                          "Tie!")
                   << "\nplay again? (y/n)\n>>_";
         b.reset();
-        while(!(std::cin >> c)) {
-            std::cin.clear();
-            std::cin.ignore(INT32_MAX,'\n');
+        while(!(cin >> c)) {
+            cin.clear();
+            cin.ignore(INT32_MAX,'\n');
         }
     } while(c == 'y');
     return 0;

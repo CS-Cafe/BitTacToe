@@ -16,7 +16,7 @@ namespace opponent {
     constexpr int HIGH_SCORE = 10;
 
     /*
-     * TODO: ADD HASHING !!! 
+     * TODO: ADD HASHING !!!
      */
     namespace {
 
