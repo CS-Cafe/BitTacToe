@@ -130,6 +130,7 @@ namespace bit {
          * The bitboard belonging to O.
          */
         uint16_t bbo;
+
     public:
 
         /**
@@ -179,6 +180,21 @@ namespace bit {
             a == X? bbx ^= Squares[i]: bbo ^= Squares[i];
         }
 
+        [[nodiscard]]
+        constexpr bool freeSquare(const int i) {
+            assert(i >= 0 && i < BoardLength);
+            return !((bbx | bbo) & Squares[i]);
+        }
+
+        [[nodiscard]]
+        constexpr bool fullSquare(const int i) {
+            assert(i >= 0 && i < BoardLength);
+            return ((bbx | bbo) & Squares[i]);
+        }
+
+        constexpr void reset()
+        { bbx = bbo = 0; }
+
         /**
          * A function to determine whether or not
          * a given alliance is victorious. That is,
@@ -193,10 +209,9 @@ namespace bit {
             const uint64_t t = A == X? bbx: bbo;
             // Get the magic constant that corresponds to
             // this board and intersect with a mask
-            // with a single high bit at an index based on
-            // this board. The resulting sixty-four bit
-            // number will either be zero or a non-negative
-            // integer.
+            // containing a single high bit. The resulting
+            // sixty-four bit number will either be zero
+            // or a non-negative integer.
             return (Magic[t >> 3U] & (1U << (t & 7U)));
         }
 
