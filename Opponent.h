@@ -42,7 +42,7 @@ namespace opponent {
                         alphaOmega<false>(
                             b, depth + 1,
                             a, o
-                            )
+                        )
                     );
                     b->mark<X>(i);
                     a = score;
