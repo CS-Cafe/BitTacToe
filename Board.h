@@ -104,7 +104,8 @@ namespace bit {
      * A mapping from Alliance to character
      * representation.
      */
-    constexpr char AllianceToChar[] { 'X', 'O' };
+    [[maybe_unused]]
+    constexpr char AllianceToChar[] = { 'X', 'O' };
 
     /**
      * The Alliances, enumerated.
@@ -190,14 +191,14 @@ namespace bit {
             a == X? bbx ^= Squares[i]: bbo ^= Squares[i];
         }
 
-        [[nodiscard]]
-        constexpr bool freeSquare(const int i) const {
+        [[maybe_unused]] [[nodiscard]]
+        constexpr bool emptySquare(const int i) const {
             assert(i >= 0 && i < BoardLength);
             return !((bbx | bbo) & Squares[i]);
         }
 
         [[nodiscard]]
-        constexpr bool fullSquare(const int i) const {
+        constexpr bool occupiedSquare(const int i) const {
             assert(i >= 0 && i < BoardLength);
             return ((bbx | bbo) & Squares[i]);
         }
@@ -245,7 +246,8 @@ namespace bit {
          *
          * @return whether this board is full.
          */
-        constexpr bool isFull()
+        [[nodiscard]]
+        constexpr bool isFull() const
         { return ((bbx | bbo) & 0x01FF) == 0x01FF; }
 
         /**

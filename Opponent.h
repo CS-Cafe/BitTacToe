@@ -34,7 +34,7 @@ namespace opponent {
 
             int score = MAX ? INT8_MIN : INT8_MAX;
             for (int i = 0; i < BoardLength; ++i) {
-                if (b->fullSquare(i))
+                if (b->occupiedSquare(i))
                     continue;
                 if (MAX) {
                     b->mark<X>(i);
@@ -108,7 +108,7 @@ namespace opponent {
                 maxScore = INT8_MIN,
                 currentScore;
         for (int i = 0; i < BoardLength; ++i) {
-            if (b->fullSquare(i)) continue;
+            if (b->occupiedSquare(i)) continue;
             b->mark<X>(i);
             currentScore =
                 alphaOmega<false>(

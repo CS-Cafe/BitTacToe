@@ -23,7 +23,7 @@ int main() {
                       << "5 4 3\n"
                       << "2 1 0\n>>_";
             scanf("%d", &i);
-            if(i < 0 || i > 8 || b.fullSquare(i))
+            if(i < 0 || i > 8 || b.occupiedSquare(i))
                 continue;
             b.mark<O>(i);
             std::cout << "\nYour move:\n" << b << '\n';
