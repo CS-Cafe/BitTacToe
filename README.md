@@ -8,3 +8,5 @@ The magic numbers used to check for victory are segments of a 512-bit map. Here,
 ### ***Note:***
 
 I randomly came up with this scheme. I'm pretty sure there are ways to optimize further... I just couldn't think of another one that considered both time and memory. Please give the problem a try if you are in the mood for it :)
+
+#### *Average runtime of DFS from home position: 128 microseconds. Lets see if we can go faster!*
