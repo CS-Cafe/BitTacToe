@@ -13,12 +13,12 @@ namespace opponent {
     using bit::X;
     using bit::O;
 
-    constexpr int HIGH_SCORE = 10;
-
     /*
      * TODO: ADD HASHING !!!
      */
     namespace {
+
+        constexpr int HIGH_SCORE = 10;
 
         template<bool MAX>
         inline int alphaOmega(Board *const b,

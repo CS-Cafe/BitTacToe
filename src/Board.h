@@ -24,17 +24,6 @@ namespace bit {
     };
 
     /**
-     * Bitboards representing the
-     * individual indexes of a magic
-     * bitmap.
-     */
-    constexpr uint8_t Index[] = {
-            0x01, 0x02, 0x04,
-            0x08, 0x10, 0x20,
-            0x40, 0x80,
-    };
-
-    /**
      * Magic bitmaps that contain
      * special endgame information
      * for quick access. 512 bits.
@@ -238,11 +227,14 @@ namespace bit {
         constexpr bool hasVictory() {
             static_assert(A == X || A == O);
             const uint64_t t = A == X? bbx: bbo;
+            // Whoops, forgot to update this!
             // Get the magic constant that corresponds to
             // this board and intersect with a mask
-            // containing a single high bit. The resulting
-            // sixty-four bit number will either be zero
-            // or a non-negative integer.
+            // containing a single high bit at the index
+            // determined by board mod 8. The resulting
+            // 8-bit number will either be zero or a
+            // non-negative integer depending on the
+            // extracted information.
             return Magic[t >> 3U] & (1ULL << (t & 7ULL));
         }
 
