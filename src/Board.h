@@ -260,7 +260,7 @@ namespace bit {
          */
         [[nodiscard]]
         constexpr bool isFull() const
-        { return ((bbx | bbo) & 0x01FF) == 0x01FF; }
+        { return (bbx | bbo) == 0x01FF; }
 
         /**
          * Insertion overload.
