@@ -53,10 +53,10 @@ RM = "C:\Program Files\JetBrains\CLion 2021.2.1\bin\cmake\win\bin\cmake.exe" -E 
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\evcmo\CLionProjects\BitTacToe
+CMAKE_SOURCE_DIR = C:\Users\evcmo\CLionProjects\CppTacToe
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\evcmo\CLionProjects\BitTacToe\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Users\evcmo\CLionProjects\CppTacToe\cmake-build-debug
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -80,14 +80,14 @@ clean: CMakeFiles/BitTacToe.dir/clean
 CMakeFiles/BitTacToe.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\BitTacToe.dir\build.make CMakeFiles/BitTacToe.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\BitTacToe.dir\build.make CMakeFiles/BitTacToe.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\evcmo\CLionProjects\BitTacToe\cmake-build-debug\CMakeFiles --progress-num=1,2 "Built target BitTacToe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\evcmo\CLionProjects\CppTacToe\cmake-build-debug\CMakeFiles --progress-num=1,2 "Built target BitTacToe"
 .PHONY : CMakeFiles/BitTacToe.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/BitTacToe.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\evcmo\CLionProjects\BitTacToe\cmake-build-debug\CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\evcmo\CLionProjects\CppTacToe\cmake-build-debug\CMakeFiles 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/BitTacToe.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\evcmo\CLionProjects\BitTacToe\cmake-build-debug\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\evcmo\CLionProjects\CppTacToe\cmake-build-debug\CMakeFiles 0
 .PHONY : CMakeFiles/BitTacToe.dir/rule
 
 # Convenience name for target.

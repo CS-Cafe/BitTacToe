@@ -56,10 +56,10 @@ RM = "C:\Program Files\JetBrains\CLion 2021.2.1\bin\cmake\win\bin\cmake.exe" -E 
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\evcmo\CLionProjects\BitTacToe
+CMAKE_SOURCE_DIR = C:\Users\evcmo\CLionProjects\CppTacToe
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\evcmo\CLionProjects\BitTacToe\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Users\evcmo\CLionProjects\CppTacToe\cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -86,9 +86,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\evcmo\CLionProjects\BitTacToe\cmake-build-debug\CMakeFiles C:\Users\evcmo\CLionProjects\BitTacToe\cmake-build-debug\\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\evcmo\CLionProjects\CppTacToe\cmake-build-debug\CMakeFiles C:\Users\evcmo\CLionProjects\CppTacToe\cmake-build-debug\\CMakeFiles\progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\evcmo\CLionProjects\BitTacToe\cmake-build-debug\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\evcmo\CLionProjects\CppTacToe\cmake-build-debug\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -128,29 +128,29 @@ BitTacToe/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\BitTacToe.dir\build.make CMakeFiles/BitTacToe.dir/build
 .PHONY : BitTacToe/fast
 
-main.obj: main.cpp.obj
-.PHONY : main.obj
+src/main.obj: src/main.cpp.obj
+.PHONY : src/main.obj
 
 # target to build an object file
-main.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BitTacToe.dir\build.make CMakeFiles/BitTacToe.dir/main.cpp.obj
-.PHONY : main.cpp.obj
+src/main.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\BitTacToe.dir\build.make CMakeFiles/BitTacToe.dir/src/main.cpp.obj
+.PHONY : src/main.cpp.obj
 
-main.i: main.cpp.i
-.PHONY : main.i
+src/main.i: src/main.cpp.i
+.PHONY : src/main.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BitTacToe.dir\build.make CMakeFiles/BitTacToe.dir/main.cpp.i
-.PHONY : main.cpp.i
+src/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\BitTacToe.dir\build.make CMakeFiles/BitTacToe.dir/src/main.cpp.i
+.PHONY : src/main.cpp.i
 
-main.s: main.cpp.s
-.PHONY : main.s
+src/main.s: src/main.cpp.s
+.PHONY : src/main.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BitTacToe.dir\build.make CMakeFiles/BitTacToe.dir/main.cpp.s
-.PHONY : main.cpp.s
+src/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\BitTacToe.dir\build.make CMakeFiles/BitTacToe.dir/src/main.cpp.s
+.PHONY : src/main.cpp.s
 
 # Help Target
 help:
@@ -161,9 +161,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... BitTacToe
-	@echo ... main.obj
-	@echo ... main.i
-	@echo ... main.s
+	@echo ... src/main.obj
+	@echo ... src/main.i
+	@echo ... src/main.s
 .PHONY : help
 
 

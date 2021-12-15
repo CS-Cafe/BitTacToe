@@ -226,7 +226,7 @@ namespace bit {
         template<Alliance A>
         constexpr bool hasVictory() {
             static_assert(A == X || A == O);
-            const uint64_t t = A == X? bbx: bbo;
+            const uint16_t t = A == X? bbx: bbo;
             // Whoops, forgot to update this!
             // Get the magic constant that corresponds to
             // this board and intersect with a mask
@@ -235,7 +235,7 @@ namespace bit {
             // 8-bit number will either be zero or a
             // non-negative integer depending on the
             // extracted information.
-            return Magic[t >> 3U] & (1ULL << (t & 7ULL));
+            return Magic[t >> 3U] & (1U << (t & 7U));
         }
 
         /**
@@ -248,9 +248,9 @@ namespace bit {
          */
         constexpr bool hasVictory(const Alliance a) {
             assert(a == X || a == O);
-            const uint64_t t = a == X? bbx: bbo;
+            const uint16_t t = a == X? bbx: bbo;
             // See overload.
-            return Magic[t >> 3U] & (1ULL << (t & 7ULL));
+            return Magic[t >> 3U] & (1U << (t & 7U));
         }
 
         /**
