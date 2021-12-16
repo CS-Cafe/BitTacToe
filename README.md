@@ -15,12 +15,12 @@ let me know and I'll add you to the project!
 
 <pre>
  <code>
-        - | - | o
+        x | o | o
        ---+---+---
         - | x | -
        ---+---+---
         - | - | -
-       I took 0.000127 seconds!
+       I took 0.000001 seconds!
        Make a move (1-9)
        9 8 7
        6 5 4
