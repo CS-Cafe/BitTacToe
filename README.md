@@ -20,7 +20,7 @@
  </code>
 </pre>
 
-## *Perfect PLay*
+## *Perfect Play*
 
 <p>
 A perfect-play tic tac toe engine plays a game with no errors. The game will never result in a
