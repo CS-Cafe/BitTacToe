@@ -1,6 +1,6 @@
 # Unreasonably Fast Tic Tac Toe
  
-#### *A lightning-fast tic tac toe project.*
+#### *A lightning-fast tic tac toe project. Faster than Zenitsu in REM.*
 
 ## *Command Line Interface*
 
