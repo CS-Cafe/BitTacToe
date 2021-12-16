@@ -139,10 +139,17 @@ namespace bit {
         constexpr Board() : bbx(0), bbo(0)
         { }
 
+        /**
+         * A function to get the bitboard layer
+         * of the given alliance.
+         *
+         * @tparam A the alliance
+         * @return the bitboard layer of the
+         * given alliance
+         */
         template<Alliance A>
-        uint16_t get() {
-            return A == X? bbx: bbo;
-        }
+        constexpr uint16_t get()
+        { return A == X? bbx: bbo; }
 
         /**
          * A function to make or unmake a mark
