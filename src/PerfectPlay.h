@@ -2,8 +2,10 @@
 // Created by evcmo on 12/15/2021.
 //
 
+#pragma once
 #ifndef BITTACTOE_PERFECTPLAY_H
 #define BITTACTOE_PERFECTPLAY_H
+#include "Opponent.h"
 
 namespace bit::tab {
 
@@ -1052,7 +1054,7 @@ namespace bit::tab {
      */
     constexpr uint64_t z1[] = {
             0xd76839565beecf36, 0x9ebabbac72996774,
-            0x58daa546e07e343, 0x9af8407247d088a6,
+            0x058daa546e07e343, 0x9af8407247d088a6,
             0xb6f62e2d68af173b, 0x44999b38cc0a39e8,
             0xef9333ce69ec3105, 0x455318f516a80f93,
             0x5e478daa31f52c67
@@ -1063,7 +1065,7 @@ namespace bit::tab {
      */
     constexpr uint64_t z2[] = {
             0xc59dbf28dc987d09, 0xa5ce5e034202e055,
-            0x83b228e8a467490, 0xc20b57040627bc17,
+            0x083b228e8a467490, 0xc20b57040627bc17,
             0x7082977450c1fe65, 0x92a0d4d72bd9ff9b,
             0x2178b2302ff33436, 0x9907267fc2f1e77f,
             0x271132d8e496cc21
@@ -1079,7 +1081,7 @@ namespace bit::tab {
     { return k & 4095ULL; }
 
     /**
-     * A "quadratic probing" hash function.
+     * A "probing" hash function.
      *
      * @param k the key
      * @param i the offset
@@ -1120,6 +1122,7 @@ namespace bit::perf {
      * @return a zobrist hash key representing
      * the given bitboard
      */
+    [[maybe_unused]]
     constexpr uint16_t zobrist
     (const uint16_t b, const uint16_t d) {
         uint16_t x = b;
@@ -1134,6 +1137,35 @@ namespace bit::perf {
     }
 
     /**
+     * A function to walk through the perfect-play
+     * tree and store best moves in a table.
+     *
+     * @param table a 512x512 table to fill
+     * @param b the board to use
+     */
+    void mapBestMoves
+    (uint8_t** const t, Board* const b) {
+        if(b->isFull() ||
+           b->hasVictory<X>() ||
+           b->hasVictory<O>())
+            return;
+        for(int i = 0;
+            i < BoardLength; ++i) {
+            b->mark<O>(i);
+            if(b->isFull() ||
+               b->hasVictory<O>())
+            { b->mark<O>(i); continue; }
+            const int m =
+                    opponent::chooseMove(b);
+            t[b->get<O>()][b->get<X>()] = m;
+            b->mark<X>(m);
+            mapBestMoves(t, b);
+            b->mark<X>(m);
+            b->mark<O>(i);
+        }
+    }
+
+    /**
      * An open address search method to
      * return the table entry corresponding
      * to the given key.
@@ -1142,8 +1174,8 @@ namespace bit::perf {
      * @return the table entry corresponding
      * to the given key
      */
-    constexpr uint8_t probe(const uint16_t key) {
-        int i = 0, j;
+    uint8_t probe(const uint16_t key) {
+        int i = 0, j = 0;
         do {
             j = h2(key, i);
             if(table[j].key == key)

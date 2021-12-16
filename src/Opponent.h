@@ -126,39 +126,6 @@ namespace opponent {
         }
         return bestMove;
     }
-
-    /**
-     * A function to walk through the perfect-play
-     * tree and store best moves in a table.
-     *
-     * @param table a 512x512 table to fill
-     * @param b the board to use
-     */
-    void mapBestMoves
-    (int8_t** const table,
-     Board* const b) {
-        if(b->isFull() ||
-           b->hasVictory<X>() ||
-           b->hasVictory<O>())
-            return;
-        for(int i = 0;
-            i < BoardLength; ++i) {
-            b->mark<O>(i);
-            if(b->isFull() ||
-               b->hasVictory<O>())
-            { b->mark<O>(i); continue; }
-            const int m =
-                opponent::chooseMove(b);
-            table
-            [b->get<O>()]
-            [b->get<X>()]
-                    = (int8_t) m;
-            b->mark<X>(m);
-            mapBestMoves(table, b);
-            b->mark<X>(m);
-            b->mark<O>(i);
-        }
-    }
 }
 
 #endif //BITTACTOE_OPPONENT_H

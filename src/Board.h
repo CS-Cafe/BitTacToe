@@ -5,6 +5,7 @@
 #pragma once
 #ifndef BITTACTOE_BOARD_H
 #define BITTACTOE_BOARD_H
+#include <ostream>
 #include <iostream>
 #include <cassert>
 
