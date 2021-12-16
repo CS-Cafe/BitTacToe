@@ -1,6 +1,6 @@
-# BitTacToe
+# Unreasonably Fast Tic Tac Toe
  
-A minimalist tic tac toe project. An excuse to bit-twiddle!  
+A fast tic tac toe project. An excuse to bit-twiddle!  
 
 <p>
 The search is now precalculated at startup and stored in a 3*4096 byte table with a 
