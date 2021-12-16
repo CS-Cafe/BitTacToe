@@ -86,6 +86,9 @@
 		<Unit filename="C:/Users/evcmo/CLionProjects/CppTacToe/src/Opponent.h">
 			<Option target="BitTacToe"/>
 		</Unit>
+		<Unit filename="C:/Users/evcmo/CLionProjects/CppTacToe/src/PerfectPlay.h">
+			<Option target="BitTacToe"/>
+		</Unit>
 		<Unit filename="C:/Users/evcmo/CLionProjects/CppTacToe/src/main.cpp">
 			<Option target="BitTacToe"/>
 		</Unit>
