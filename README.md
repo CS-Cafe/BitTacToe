@@ -23,7 +23,7 @@
 ## *Perfect Play*
 
 <p>
-A perfect-play tic tac toe engine plays a game with no errors. The game will never result in a
+A perfect-play tic tac toe engine plays a game with no errors. The game will never yield a
 win for the user. A perfect play engine is based around Turing's Minimax algorithm. 
 </p> 
 
