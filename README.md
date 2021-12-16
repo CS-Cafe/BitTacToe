@@ -53,5 +53,7 @@ However, I was unable to find a multiplier. If you can find a multiplier, please
 let me know and I'll add you to the project!
 </p>
 
-## *Average runtime of best move calculation from home position: 1 microsecond.*
+## *Average Best Move Calculation Time*
+
+1 microsecond.
 
