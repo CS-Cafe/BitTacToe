@@ -47,7 +47,7 @@ quadratic "open-address" hash scheme.
 </p>
 
 <p>
-I think that this can be improved with perfect hashing. 
+I think that the speed of the engine can be improved with perfect hashing. 
 However, I was unable to find a multiplier. If you can find a multiplier, please
 let me know and I'll add you to the project!
 </p>
