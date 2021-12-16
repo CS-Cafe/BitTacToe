@@ -1069,9 +1069,22 @@ namespace bit::tab {
             0x271132d8e496cc21
     };
 
+    /**
+     * A "hashing by division" hash function.
+     *
+     * @param k the hash key
+     * @return a table index
+     */
     constexpr uint64_t h1(const uint16_t k)
     { return k & 4095ULL; }
 
+    /**
+     * A "quadratic probing" hash function.
+     *
+     * @param k the key
+     * @param i the offset
+     * @return a table index
+     */
     constexpr int h2
     (const uint16_t k, const int i) {
         return (int)(
