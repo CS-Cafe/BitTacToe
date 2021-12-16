@@ -1095,6 +1095,7 @@ namespace bit::tab {
 }
 
 namespace bit::perf {
+    using tab::table, tab::z1, tab::z2, tab::h2;
 
     /**
      * A function to return a random hash
