@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/evcmo/CLionProjects/CppTacToe/src/Board.h
+iostream
+-
+cassert
+-
+
+C:/Users/evcmo/CLionProjects/CppTacToe/src/Opponent.h
+Board.h
+C:/Users/evcmo/CLionProjects/CppTacToe/src/Board.h
+
+C:/Users/evcmo/CLionProjects/CppTacToe/src/main.cpp
+ostream
+-
+ctime
+-
+Board.h
+C:/Users/evcmo/CLionProjects/CppTacToe/src/Board.h
+Opponent.h
+C:/Users/evcmo/CLionProjects/CppTacToe/src/Opponent.h
+

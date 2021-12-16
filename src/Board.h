@@ -139,6 +139,11 @@ namespace bit {
         constexpr Board() : bbx(0), bbo(0)
         { }
 
+        template<Alliance A>
+        uint16_t get() {
+            return A == X? bbx: bbo;
+        }
+
         /**
          * A function to make or unmake a mark
          * on the board.
