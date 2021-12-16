@@ -42,7 +42,7 @@ magic table.
 Due to its extremely small state-space, the full game tree of tic tac toe can be explored in 
 a matter of microseconds. This speed allows for full exploration of the "perfect play" tree 
 in well under a second. The perfect play tree can be used to create a table of perfect moves.
-Perfect moves are now precalculated at startup and stored in a 3*4096 byte table with a 
+These perfect moves are now precalculated at startup and stored in a 12288 byte table with a 
 quadratic "open-address" hash scheme.
 </p>
 
