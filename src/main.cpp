@@ -1060,23 +1060,24 @@ namespace {
     };
 
     constexpr uint64_t h1
-    (const uint64_t k)
+    (const uint16_t k)
     { return k & 4095ULL; }
 
     constexpr int h2
-    (const uint64_t k, const int i) {
+    (const uint16_t k, const int i) {
         return (int)(
             (h1(k) + (i << 1U) + (i << 2U))
             & 4095ULL
         );
     }
 
-    constexpr uint64_t k1
+    constexpr uint16_t k1
     (const uint16_t b, const uint16_t d) {
         uint16_t x = b;
         uint16_t c = 0;
-        for(;x; x &= x - 1)
+        for(;x; x &= x - 1) {
             c ^= z1[bitScanFwd(x)];
+        }
         x = d;
         for(;x; x &= x - 1)
             c ^= z2[bitScanFwd(x)];
@@ -1084,8 +1085,7 @@ namespace {
     }
 
     constexpr uint8_t probe
-    (const int k, const int u) {
-        uint64_t key = k1(k, u);
+    (const uint16_t key) {
         int i = 0, j;
         do {
             j = h2(key, i);
@@ -1102,8 +1102,8 @@ namespace {
  * Tic Tac Toe
  */
 int main() {
-
     Board b; char c; int i = -1; bool x, o;
+    uint16_t hash = 0;
     do {
         cout << "\033[2J\033[H" << flush;
         cout << b;
@@ -1121,9 +1121,12 @@ int main() {
             if(i < 1 || i > 9 || b.occupiedSquare(i - 1))
                 continue;
             b.mark<O>(i - 1);
+            hash ^= z1[9 - i];
             if(b.isFull()) break;
             const long start = clock();
-            b.mark<X>(probe(b.get<O>(), b.get<X>()));
+            const int m = probe(hash);
+            b.mark<X>(m);
+            hash ^= z2[8 - m];
             const long end = clock() - start;
             cout << "\033[2J\033[H" << flush;
             cout << b;
@@ -1138,6 +1141,7 @@ int main() {
                     "Tie!")
              << "\nplay again? (y/n)\n>>_";
         b.reset();
+        hash = 0;
         while(!(cin >> c)) {
             cin.clear();
             cin.ignore(INT32_MAX,'\n');

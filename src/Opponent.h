@@ -127,7 +127,6 @@ namespace opponent {
         return bestMove;
     }
 
-
     void mapBestMoves
     (int8_t** const table,
      Board* const b) {
