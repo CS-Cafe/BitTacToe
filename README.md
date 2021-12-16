@@ -9,7 +9,7 @@ However, I was unable to find a multiplier. If you can find a multiplier, please
 let me know and I'll add you to the project!
 </p>
 
-#### *Average runtime of DFS from home position: 1 microsecond. Lets see if we can go faster!*
+#### *Average runtime of DFS from home position: 1 microsecond. Lets see if we can go faster or use less space!*
 
 # UI
 
