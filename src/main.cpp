@@ -1,6 +1,5 @@
 #include <ostream>
 #include <ctime>
-#include <sstream>
 #include "Board.h"
 #include "PerfectPlay.h"
 
