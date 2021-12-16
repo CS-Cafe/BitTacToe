@@ -1,12 +1,60 @@
-# BitTacToe
+# Unreasonably Fast Tic Tac Toe
  
-Minimalist tic tac toe project. An excuse to bit-twiddle!  
+#### *A lightning-fast tic tac toe project.*
 
-### ***A bit of explanation:***
-The magic numbers used to check for victory are segments of a 512-bit map. Here, each of the 512 states of a single bitboard are assigned a score of 0 or 1 depending on whether the state is terminal. For speed, this scheme relies heavily on caching, which is almost guaranteed to help during DFS.
+## *Command Line Interface*
 
-### ***Note:***
+<pre>
+ <code>
+        x | o | o
+       ---+---+---
+        - | x | -
+       ---+---+---
+        - | - | -
+       I took 0.000001 seconds!
+       Make a move (1-9)
+       9 8 7
+       6 5 4
+       3 2 1
+       >>_
+ </code>
+</pre>
 
-I randomly came up with this scheme. I'm pretty sure there are ways to optimize further... I just couldn't think of another one that considered both time and memory. Please give the problem a try if you are in the mood for it :)
+## *Perfect Play*
 
-#### *Average runtime of DFS from home position: 128 microseconds. Lets see if we can go faster!*
+<p>
+A perfect-play tic tac toe engine plays a game with no errors. The game will never yield a
+win for the user. A perfect-play engine is based on Turing's Minimax algorithm. This engine
+is a perfect-play engine.
+</p> 
+
+## *Compact Bit Board Representation*
+
+<p>
+The game of tic tac toe is played on a board with nine squares. This conveniently allows us
+to represent the board with two 16-bit integers (four bytes). Marking and erasing a move on
+the board is accomplished with xor. Tie checking is accomplished with a simple equality
+check. Victory checking is a matter of mapping one layer of the board to a single bit in a 
+magic table.
+</p> 
+
+## *Unparalleled Speed (for now)*
+
+<p>
+Due to its extremely small state-space, the full game tree of tic tac toe can be explored in 
+a matter of microseconds. This speed allows for exploration of the entire "perfect-play" tree 
+in well under a second. The perfect-play tree can be used to create a table of perfect moves.
+These perfect moves are precalculated at startup and stored in a 12288 byte table with a 
+quadratic "open-address" hash scheme.
+</p>
+
+<p>
+I think that the speed of the engine can be improved with perfect hashing. 
+However, I was unable to find a multiplier. If you can find a multiplier, please
+let me know and I'll add you to the project!
+</p>
+
+## *Average Best Move Calculation Time*
+
+1 microsecond.
+

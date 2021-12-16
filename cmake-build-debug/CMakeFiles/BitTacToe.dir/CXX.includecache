@@ -6,21 +6,23 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/evcmo/CLionProjects/BitTacToe/Board.h
+C:/Users/evcmo/CLionProjects/CppTacToe/src/Board.h
 iostream
 -
 cassert
 -
 
-C:/Users/evcmo/CLionProjects/BitTacToe/Opponent.h
+C:/Users/evcmo/CLionProjects/CppTacToe/src/Opponent.h
 Board.h
-C:/Users/evcmo/CLionProjects/BitTacToe/Board.h
+C:/Users/evcmo/CLionProjects/CppTacToe/src/Board.h
 
-C:/Users/evcmo/CLionProjects/BitTacToe/main.cpp
+C:/Users/evcmo/CLionProjects/CppTacToe/src/main.cpp
 ostream
 -
+ctime
+-
 Board.h
-C:/Users/evcmo/CLionProjects/BitTacToe/Board.h
+C:/Users/evcmo/CLionProjects/CppTacToe/src/Board.h
 Opponent.h
-C:/Users/evcmo/CLionProjects/BitTacToe/Opponent.h
+C:/Users/evcmo/CLionProjects/CppTacToe/src/Opponent.h
 

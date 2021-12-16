@@ -71,7 +71,7 @@ namespace opponent {
      *
      * <p>
      * This Tic-Tac-Toe opponent uses miniMax to calculate the best move.
-     * Minimax is a search algorithm capable of choosing optimal moves in a zero-sum
+     * Minimax is a probe algorithm capable of choosing optimal moves in a zero-sum
      * game. A zero-sum game is one in which the respective gains and losses of the
      * two players (or teams) cancel each other out. This property ensures that a
      * loss for one player results in an equivalent gain for the other.
@@ -93,11 +93,11 @@ namespace opponent {
      *
      * <p>
      * This minimax algorithm uses alpha-beta pruning to cut off large portions of
-     * the search tree that need not be visited. If a part of the tree is guaranteed
+     * the probe tree that need not be visited. If a part of the tree is guaranteed
      * to be cut off by a min or max node, then there is no need to look any further.
      * We can make this guarantee by setting the values of variables 'alpha' and 'beta'
      * as a score is returned from a child node up into a parent node. This process
-     * relies on the fact that each search tree is navigated both iteratively and
+     * relies on the fact that each probe tree is navigated both iteratively and
      * recursively. For Example, after returning from a child min-node into a parent
      * max-node, alpha is set, and the algorithm enters the next child min-node. The
      * value that this min-node returns must be between alpha and beta. Beta is now
@@ -125,6 +125,39 @@ namespace opponent {
             }
         }
         return bestMove;
+    }
+
+    /**
+     * A function to walk through the perfect-play
+     * tree and store best moves in a table.
+     *
+     * @param table a 512x512 table to fill
+     * @param b the board to use
+     */
+    void mapBestMoves
+    (int8_t** const table,
+     Board* const b) {
+        if(b->isFull() ||
+           b->hasVictory<X>() ||
+           b->hasVictory<O>())
+            return;
+        for(int i = 0;
+            i < BoardLength; ++i) {
+            b->mark<O>(i);
+            if(b->isFull() ||
+               b->hasVictory<O>())
+            { b->mark<O>(i); continue; }
+            const int m =
+                opponent::chooseMove(b);
+            table
+            [b->get<O>()]
+            [b->get<X>()]
+                    = (int8_t) m;
+            b->mark<X>(m);
+            mapBestMoves(table, b);
+            b->mark<X>(m);
+            b->mark<O>(i);
+        }
     }
 }
 

@@ -1,22 +1,19 @@
 #include <ostream>
 #include <ctime>
+#include <sstream>
 #include "Board.h"
-#include "Opponent.h"
+#include "PerfectPlay.h"
 
 using namespace bit;
-using namespace opponent;
-using std::cout;
-using std::cin;
-using std::flush;
+using namespace perf;
+using std::cout, std::cin, std::flush;
 
 /**
- * I wrote this in 5 minutes... It needs lots of
- * work. A GUI would be awesome!
- *
- * @return
+ * Tic Tac Toe
  */
 int main() {
     Board b; char c; int i = -1; bool x, o;
+    uint16_t hash = 0;
     do {
         cout << "\033[2J\033[H" << flush;
         cout << b;
@@ -34,9 +31,12 @@ int main() {
             if(i < 1 || i > 9 || b.occupiedSquare(i - 1))
                 continue;
             b.mark<O>(i - 1);
+            hash ^= zobrist<O>(9 - i);
             if(b.isFull()) break;
             const long start = clock();
-            b.mark<X>(opponent::chooseMove(&b));
+            const int m = probe(hash);
+            b.mark<X>(m);
+            hash ^= zobrist<X>(8 - m);
             const long end = clock() - start;
             cout << "\033[2J\033[H" << flush;
             cout << b;
@@ -46,11 +46,12 @@ int main() {
             );
         }
         cout << '\n'
-                  << (x? "I win!":
-                      o? "You win!":
-                         "Tie!")
-                  << "\nplay again? (y/n)\n>>_";
+             << (x? "I win!":
+                 o? "You win!":
+                    "Tie!")
+             << "\nplay again? (y/n)\n>>_";
         b.reset();
+        hash = 0;
         while(!(cin >> c)) {
             cin.clear();
             cin.ignore(INT32_MAX,'\n');

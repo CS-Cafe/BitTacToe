@@ -2,7 +2,7 @@ file(REMOVE_RECURSE
   "BitTacToe.exe"
   "BitTacToe.exe.manifest"
   "BitTacToe.pdb"
-  "CMakeFiles/BitTacToe.dir/main.cpp.obj"
+  "CMakeFiles/BitTacToe.dir/src/main.cpp.obj"
   "libBitTacToe.dll.a"
 )
 

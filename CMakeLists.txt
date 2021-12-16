@@ -3,4 +3,4 @@ project(BitTacToe)
 
 set(CMAKE_CXX_STANDARD 23)
 
-add_executable(BitTacToe src/main.cpp src/Board.h src/Opponent.h)
+add_executable(BitTacToe src/main.cpp src/Board.h src/Opponent.h src/PerfectPlay.h)

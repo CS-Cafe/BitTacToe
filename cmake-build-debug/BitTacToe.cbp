@@ -8,28 +8,28 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="C:/Users/evcmo/CLionProjects/BitTacToe/cmake-build-debug"/>
+				<Option working_dir="C:/Users/evcmo/CLionProjects/CppTacToe/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/evcmo/CLionProjects/BitTacToe/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/evcmo/CLionProjects/BitTacToe/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/evcmo/CLionProjects/BitTacToe/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/evcmo/CLionProjects/BitTacToe/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/evcmo/CLionProjects/CppTacToe/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/evcmo/CLionProjects/CppTacToe/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/evcmo/CLionProjects/CppTacToe/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/evcmo/CLionProjects/CppTacToe/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="C:/Users/evcmo/CLionProjects/BitTacToe/cmake-build-debug"/>
+				<Option working_dir="C:/Users/evcmo/CLionProjects/CppTacToe/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/evcmo/CLionProjects/BitTacToe/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/evcmo/CLionProjects/BitTacToe/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/evcmo/CLionProjects/BitTacToe/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/evcmo/CLionProjects/BitTacToe/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/evcmo/CLionProjects/CppTacToe/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/evcmo/CLionProjects/CppTacToe/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/evcmo/CLionProjects/CppTacToe/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/evcmo/CLionProjects/CppTacToe/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="BitTacToe">
-				<Option output="C:/Users/evcmo/CLionProjects/BitTacToe/cmake-build-debug/BitTacToe.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="C:/Users/evcmo/CLionProjects/BitTacToe/cmake-build-debug"/>
+				<Option output="C:/Users/evcmo/CLionProjects/CppTacToe/cmake-build-debug/BitTacToe.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/evcmo/CLionProjects/CppTacToe/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -42,15 +42,15 @@
 					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include-fixed"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/evcmo/CLionProjects/BitTacToe/cmake-build-debug/Makefile&quot;  VERBOSE=1 BitTacToe"/>
-					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/evcmo/CLionProjects/BitTacToe/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/evcmo/CLionProjects/BitTacToe/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/evcmo/CLionProjects/BitTacToe/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/evcmo/CLionProjects/CppTacToe/cmake-build-debug/Makefile&quot;  VERBOSE=1 BitTacToe"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/evcmo/CLionProjects/CppTacToe/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/evcmo/CLionProjects/CppTacToe/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/evcmo/CLionProjects/CppTacToe/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="BitTacToe/fast">
-				<Option output="C:/Users/evcmo/CLionProjects/BitTacToe/cmake-build-debug/BitTacToe.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="C:/Users/evcmo/CLionProjects/BitTacToe/cmake-build-debug"/>
+				<Option output="C:/Users/evcmo/CLionProjects/CppTacToe/cmake-build-debug/BitTacToe.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/evcmo/CLionProjects/CppTacToe/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -63,33 +63,36 @@
 					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include-fixed"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/evcmo/CLionProjects/BitTacToe/cmake-build-debug/Makefile&quot;  VERBOSE=1 BitTacToe/fast"/>
-					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/evcmo/CLionProjects/BitTacToe/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/evcmo/CLionProjects/BitTacToe/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/evcmo/CLionProjects/BitTacToe/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/evcmo/CLionProjects/CppTacToe/cmake-build-debug/Makefile&quot;  VERBOSE=1 BitTacToe/fast"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/evcmo/CLionProjects/CppTacToe/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/evcmo/CLionProjects/CppTacToe/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/evcmo/CLionProjects/CppTacToe/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="C:/Users/evcmo/CLionProjects/BitTacToe/cmake-build-debug"/>
+				<Option working_dir="C:/Users/evcmo/CLionProjects/CppTacToe/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/evcmo/CLionProjects/BitTacToe/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/evcmo/CLionProjects/BitTacToe/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/evcmo/CLionProjects/BitTacToe/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/evcmo/CLionProjects/BitTacToe/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/evcmo/CLionProjects/CppTacToe/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/evcmo/CLionProjects/CppTacToe/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/evcmo/CLionProjects/CppTacToe/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/evcmo/CLionProjects/CppTacToe/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="C:/Users/evcmo/CLionProjects/BitTacToe/Board.h">
+		<Unit filename="C:/Users/evcmo/CLionProjects/CppTacToe/src/Board.h">
 			<Option target="BitTacToe"/>
 		</Unit>
-		<Unit filename="C:/Users/evcmo/CLionProjects/BitTacToe/Opponent.h">
+		<Unit filename="C:/Users/evcmo/CLionProjects/CppTacToe/src/Opponent.h">
 			<Option target="BitTacToe"/>
 		</Unit>
-		<Unit filename="C:/Users/evcmo/CLionProjects/BitTacToe/main.cpp">
+		<Unit filename="C:/Users/evcmo/CLionProjects/CppTacToe/src/PerfectPlay.h">
 			<Option target="BitTacToe"/>
 		</Unit>
-		<Unit filename="C:/Users/evcmo/CLionProjects/BitTacToe/CMakeLists.txt">
+		<Unit filename="C:/Users/evcmo/CLionProjects/CppTacToe/src/main.cpp">
+			<Option target="BitTacToe"/>
+		</Unit>
+		<Unit filename="C:/Users/evcmo/CLionProjects/CppTacToe/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>
