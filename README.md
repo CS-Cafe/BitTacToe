@@ -24,7 +24,8 @@
 
 <p>
 A perfect-play tic tac toe engine plays a game with no errors. The game will never yield a
-win for the user. A perfect play engine is based on Turing's Minimax algorithm. 
+win for the user. A perfect-play engine is based on Turing's Minimax algorithm. This engine
+is a perfect-play engine.
 </p> 
 
 ## *Compact Bit Board Representation*
@@ -32,7 +33,7 @@ win for the user. A perfect play engine is based on Turing's Minimax algorithm.
 <p>
 The game of tic tac toe is played on a board with nine squares. This conveniently allows us
 to represent the board with two 16-bit integers (four bytes). Marking and erasing a move on
-the board can be accomplished with xor. Tie checking can be accomplished with a simple equality
+the board is accomplished with xor. Tie checking is accomplished with a simple equality
 check. Victory checking is a matter of mapping one layer of the board to a single bit in a 
 magic table.
 </p> 
@@ -43,7 +44,7 @@ magic table.
 Due to its extremely small state-space, the full game tree of tic tac toe can be explored in 
 a matter of microseconds. This speed allows for exploration of the entire "perfect-play" tree 
 in well under a second. The perfect-play tree can be used to create a table of perfect moves.
-These perfect moves are now precalculated at startup and stored in a 12288 byte table with a 
+These perfect moves are precalculated at startup and stored in a 12288 byte table with a 
 quadratic "open-address" hash scheme.
 </p>
 
