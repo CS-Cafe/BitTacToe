@@ -127,6 +127,13 @@ namespace opponent {
         return bestMove;
     }
 
+    /**
+     * A function to walk through the perfect-play
+     * tree and store best moves in a table.
+     *
+     * @param table a 512x512 table to fill
+     * @param b the board to use
+     */
     void mapBestMoves
     (int8_t** const table,
      Board* const b) {

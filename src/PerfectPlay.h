@@ -5,14 +5,22 @@
 #ifndef BITTACTOE_PERFECTPLAY_H
 #define BITTACTOE_PERFECTPLAY_H
 
-namespace bit::perf {
+namespace bit::tab {
 
+    /**
+     * An entry has a key and a payload.
+     * An entry is an immutable aggregate.
+     */
     struct Entry final {
-        const uint16_t key = -1;
-        const uint8_t payload = -1;
+        const uint16_t key;
+        const uint8_t payload;
     };
 
-    constexpr Entry t1[4096] = {
+    /**
+     * An open-addressed hash table to map the
+     * current board to a best move.
+     */
+    constexpr Entry table[4096] = {
             {0xd000U,  3U},{0xffffU,255U},{0xffffU,255U},{0xb003U,  2U},
             {0xffffU,255U},{0xe005U,  0U},{0x9006U,  0U},{0xffffU,255U},
             {0x2008U,  1U},{0x3003U,  3U},{0xb00aU,  2U},{0x500bU,  3U},
@@ -1039,6 +1047,9 @@ namespace bit::perf {
             {0xffffU,255U},{0x8ffdU,  0U},{0xffffU,255U},{0xffffU,255U}
     };
 
+    /**
+     * Zobrist hashes for o.
+     */
     constexpr uint64_t z1[] = {
             0xd76839565beecf36, 0x9ebabbac72996774,
             0x58daa546e07e343, 0x9af8407247d088a6,
@@ -1047,6 +1058,9 @@ namespace bit::perf {
             0x5e478daa31f52c67
     };
 
+    /**
+     * Zobrist hashes for x.
+     */
     constexpr uint64_t z2[] = {
             0xc59dbf28dc987d09, 0xa5ce5e034202e055,
             0x83b228e8a467490, 0xc20b57040627bc17,
@@ -1062,11 +1076,37 @@ namespace bit::perf {
     (const uint16_t k, const int i) {
         return (int)(
             (h1(k) + (i << 1U) + (i << 2U))
-            & 4095ULL
+                & 4095ULL
         );
     }
+}
 
-    constexpr uint16_t k1
+namespace bit::perf {
+
+    /**
+     * A function to return a random hash
+     * for the given alliance at the given
+     * square.
+     *
+     * @tparam A the alliance
+     * @param i the square
+     * @return a random hash representing
+     * the given alliance at the given square
+     */
+    template<Alliance A>
+    constexpr uint64_t zobrist(const int i)
+    { return A == O? z1[i]: z2[i]; }
+
+    /**
+     * A function to determine a zobrist
+     * hash key from the given bitboard.
+     *
+     * @param b the o layer of the bitboard
+     * @param d the x layer of the bitboard
+     * @return a zobrist hash key representing
+     * the given bitboard
+     */
+    constexpr uint16_t zobrist
     (const uint16_t b, const uint16_t d) {
         uint16_t x = b;
         uint16_t c = 0;
@@ -1079,15 +1119,23 @@ namespace bit::perf {
         return c;
     }
 
-    constexpr uint8_t probe
-            (const uint16_t key) {
+    /**
+     * An open address search method to
+     * return the table entry corresponding
+     * to the given key.
+     *
+     * @param key the key to use
+     * @return the table entry corresponding
+     * to the given key
+     */
+    constexpr uint8_t probe(const uint16_t key) {
         int i = 0, j;
         do {
             j = h2(key, i);
-            if(t1[j].key == key)
-                return t1[j].payload;
+            if(table[j].key == key)
+                return table[j].payload;
         } while
-        (t1[j].key != 0xffffU && ++i < 4096);
+        (table[j].key != 0xffffU && ++i < 4096);
         return -1;
     }
 }

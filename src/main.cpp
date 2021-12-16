@@ -1,16 +1,12 @@
 #include <ostream>
 #include <ctime>
 #include <sstream>
-#include <iomanip>
 #include "Board.h"
 #include "PerfectPlay.h"
 
 using namespace bit;
 using namespace perf;
-using std::cout;
-using std::cin;
-using std::flush;
-
+using std::cout, std::cin, std::flush;
 
 /**
  * Tic Tac Toe
@@ -35,12 +31,12 @@ int main() {
             if(i < 1 || i > 9 || b.occupiedSquare(i - 1))
                 continue;
             b.mark<O>(i - 1);
-            hash ^= z1[9 - i];
+            hash ^= zobrist<O>(9 - i);
             if(b.isFull()) break;
             const long start = clock();
             const int m = probe(hash);
             b.mark<X>(m);
-            hash ^= z2[8 - m];
+            hash ^= zobrist<X>(8 - m);
             const long end = clock() - start;
             cout << "\033[2J\033[H" << flush;
             cout << b;
