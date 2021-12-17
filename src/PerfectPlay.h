@@ -1052,7 +1052,7 @@ namespace bit::tab {
     /**
      * Zobrist hashes for o.
      */
-    constexpr uint64_t z1[] = {
+    constexpr uint64_t zO[] = {
             0xd76839565beecf36, 0x9ebabbac72996774,
             0x058daa546e07e343, 0x9af8407247d088a6,
             0xb6f62e2d68af173b, 0x44999b38cc0a39e8,
@@ -1063,7 +1063,7 @@ namespace bit::tab {
     /**
      * Zobrist hashes for x.
      */
-    constexpr uint64_t z2[] = {
+    constexpr uint64_t zX[] = {
             0xc59dbf28dc987d09, 0xa5ce5e034202e055,
             0x083b228e8a467490, 0xc20b57040627bc17,
             0x7082977450c1fe65, 0x92a0d4d72bd9ff9b,
@@ -1077,7 +1077,7 @@ namespace bit::tab {
      * @param k the hash key
      * @return a table index
      */
-    constexpr uint64_t h1(const uint16_t k)
+    constexpr uint64_t hash(const uint16_t k)
     { return k & 4095ULL; }
 
     /**
@@ -1087,10 +1087,10 @@ namespace bit::tab {
      * @param i the offset
      * @return a table index
      */
-    constexpr int h2
+    constexpr int hash
     (const uint16_t k, const int i) {
         return (int)(
-            (h1(k) + (i << 1U) + (i << 2U))
+            (hash(k) + (i << 1U) + (i << 2U))
                 & 4095ULL
         );
     }
@@ -1111,28 +1111,28 @@ namespace bit::perf {
      */
     template<Alliance A>
     constexpr uint64_t zobrist(const int i)
-    { return A == O? z1[i]: z2[i]; }
+    { return A == O ? zO[i] : zX[i]; }
 
     /**
      * A function to determine a zobrist
      * hash key from the given bitboard.
      *
-     * @param b the o layer of the bitboard
-     * @param d the x layer of the bitboard
+     * @param o the o layer of the bitboard
+     * @param x the x layer of the bitboard
      * @return a zobrist hash key representing
      * the given bitboard
      */
     [[maybe_unused]]
     constexpr uint16_t zobrist
-    (const uint16_t b, const uint16_t d) {
-        uint16_t x = b;
+    (const uint16_t o, const uint16_t x) {
+        uint16_t r = o;
         uint16_t c = 0;
-        for(;x; x &= x - 1) {
-            c ^= z1[bitScanFwd(x)];
+        for(; r; r &= r - 1) {
+            c ^= zO[bitScanFwd(r)];
         }
-        x = d;
-        for(;x; x &= x - 1)
-            c ^= z2[bitScanFwd(x)];
+        r = x;
+        for(; r; r &= r - 1)
+            c ^= zX[bitScanFwd(r)];
         return c;
     }
 
@@ -1156,7 +1156,7 @@ namespace bit::perf {
                b->hasVictory<O>())
             { b->mark<O>(i); continue; }
             const int m =
-                    opponent::chooseMove(b);
+                opponent::chooseMove(b);
             t[b->get<O>()][b->get<X>()] = m;
             b->mark<X>(m);
             mapBestMoves(t, b);
@@ -1177,7 +1177,7 @@ namespace bit::perf {
     uint8_t probe(const uint16_t key) {
         int i = 0, j = 0;
         do {
-            j = h2(key, i);
+            j = hash(key, i);
             if(table[j].key == key)
                 return table[j].payload;
         } while

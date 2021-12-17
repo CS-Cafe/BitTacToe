@@ -16,7 +16,7 @@ namespace opponent {
     /*
      * TODO: ADD HASHING !!!
      */
-    namespace {
+    namespace oa {
 
         constexpr int HIGH_SCORE = 10;
 
@@ -107,6 +107,7 @@ namespace opponent {
      * searching past this node, so we simply return beta.
      */
     inline int chooseMove(Board *const b) {
+        using oa::alphaOmega;
         int bestMove = -1,
                 maxScore = INT8_MIN,
                 currentScore;
