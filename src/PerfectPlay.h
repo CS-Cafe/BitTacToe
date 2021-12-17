@@ -1145,7 +1145,7 @@ namespace bit::perf {
      * @param table a 512x512 table to fill
      * @param b the board to use
      */
-    void mapBestMoves
+    inline void mapBestMoves
     (uint8_t** const t, Board* const b) {
         if(b->isFull() ||
            b->hasVictory<X>() ||
@@ -1176,15 +1176,12 @@ namespace bit::perf {
      * @return the table entry corresponding
      * to the given key
      */
-    uint8_t probe(const uint16_t key) {
-        int i = 0, j = 0;
-        do {
-            j = hash(key, i);
+    constexpr uint8_t probe(const uint16_t key) {
+        for(int i = 0 ;; ++i) {
+            const int j = hash(key, i);
             if(table[j].key == key)
                 return table[j].payload;
-        } while
-        (table[j].key != 0xffffU && ++i < 4096);
-        return -1;
+        }
     }
 }
 
