@@ -5,7 +5,7 @@
 "Yes. It's been done before. In fact, it's been done to death. Let's dare to pick the project
 up one last time... And finish it." 
 
-<h5><b><i>queue the epic music</i></b></h5>
+<h5><i>queue the epic music...</i></h5>
 
 ## *Command Line Interface*
 
