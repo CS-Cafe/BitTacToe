@@ -2,7 +2,7 @@
 
 "Yes. It's been done before. In fact, it's been done to death. Let's dare to pick the project
 up one last time... And finish it." 
-**queue the epic music**
+#### ***queue the epic music***
 
 ## *Command Line Interface*
 
