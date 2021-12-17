@@ -1,4 +1,4 @@
-# Unreasonably Fast Tic Tac Toe *Faster than lightning. Faster than Zenitsu in REM.*
+# Unreasonably Fast Tic Tac Toe - <h5>*Faster than lightning* - *Faster than Zenitsu in REM.*</h5>
 
 "Yes. It's been done before. In fact, it's been done to death. Let's dare to pick the project
 up one last time... And finish it." 
