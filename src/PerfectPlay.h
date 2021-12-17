@@ -1177,11 +1177,12 @@ namespace bit::perf {
      * to the given key
      */
     constexpr uint8_t probe(const uint16_t key) {
-        for(int i = 0 ;; ++i) {
-            const int j = hash(key, i);
-            if(table[j].key == key)
-                return table[j].payload;
-        }
+        int j;
+        for(int i = 0;
+            table[j = hash(key, i)].
+                key != key;
+                    ++i);
+        return table[j].payload;
     }
 }
 
