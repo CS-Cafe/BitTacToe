@@ -159,6 +159,14 @@ namespace bit {
 
 #       define PLACE_MARK(A, I) \
         TERN(A, bbx ^= Squares[I], bbo ^= Squares[I])
+#       define AssertTA \
+        static_assert(A == X || A == O)
+#       define AssertTB \
+        static_assert(I >= 0 && I < BoardLength)
+#       define AssertA \
+        assert(a == X || a == O)
+#       define AssertB \
+        assert(i >= 0 && i < BoardLength)
 
         /**
          * A function to make or unmake a mark
@@ -169,11 +177,8 @@ namespace bit {
          */
         template<Alliance A, int I>
         [[maybe_unused]]
-        constexpr void mark() {
-            static_assert(A == X || A == O);
-            static_assert(I >= 0 && I < BoardLength);
-            PLACE_MARK(A, I);
-        }
+        constexpr void mark()
+        { AssertTA; AssertTB; PLACE_MARK(A, I); }
 
         /**
         * A function to make or unmake a mark
@@ -183,11 +188,8 @@ namespace bit {
         * @param i the square to mark
         */
         template<Alliance A>
-        constexpr void mark(const int i) {
-            static_assert(A == X || A == O);
-            assert(i >= 0 && i < BoardLength);
-            PLACE_MARK(A, i);
-        }
+        constexpr void mark(const int i)
+        { AssertTA; AssertB; PLACE_MARK(A, i); }
 
         /**
         * A function to make or unmake a mark
@@ -197,11 +199,8 @@ namespace bit {
         * @param i the square to mark
         */
         [[maybe_unused]] constexpr void
-        mark(const Alliance a, const int i) {
-            assert(a == 0 || a == 1);
-            assert(i >= 0 && i < BoardLength);
-            PLACE_MARK(a, i);
-        }
+        mark(const Alliance a, const int i)
+        { AssertA; AssertB; PLACE_MARK(a, i); }
 
 #       undef PLACE_MARK
 #       define SQUARE_FULL(i) (bbx | bbo) & Squares[i]
@@ -216,10 +215,8 @@ namespace bit {
          */
         [[maybe_unused]] [[nodiscard]]
         constexpr bool
-        emptySquare(const int i) const {
-            assert(i >= 0 && i < BoardLength);
-            return !(SQUARE_FULL(i));
-        }
+        emptySquare(const int i) const
+        { AssertB; return !(SQUARE_FULL(i)); }
 
         /**
          * A method to check if the square at a given
@@ -231,12 +228,12 @@ namespace bit {
          */
         [[nodiscard]]
         constexpr bool
-        occupiedSquare(const int i) const {
-            assert(i >= 0 && i < BoardLength);
-            return SQUARE_FULL(i);
-        }
+        occupiedSquare(const int i) const
+        { AssertB; return SQUARE_FULL(i); }
 
 #       undef SQUARE_FULL
+#       undef AssertTB
+#       undef AssertB
 #       define EXTRACT_MAGIC(A)                        \
         do {                                           \
             const uint16_t t = GET_BOARD(A); \
@@ -252,10 +249,8 @@ namespace bit {
          * @return whether the alliance has three in a row
          */
         template<Alliance A>
-        constexpr bool hasVictory() {
-            static_assert(A == X || A == O);
-            EXTRACT_MAGIC(A);
-        }
+        constexpr bool hasVictory()
+        { AssertTA; EXTRACT_MAGIC(A); }
 
         /**
          * A function to determine whether or not
@@ -266,14 +261,14 @@ namespace bit {
          * @return whether the alliance has three in a row
          */
         [[maybe_unused]] constexpr bool
-        hasVictory(const Alliance a) {
-            assert(a == X || a == O);
-            EXTRACT_MAGIC(a);
-        }
+        hasVictory(const Alliance a)
+        { AssertA; EXTRACT_MAGIC(a); }
 
 #       undef EXTRACT_MAGIC
 #       undef TERN
 #       undef GET_BOARD
+#       undef AssertTA
+#       undef AssertA
 
         /**
          * A method to indicate whether this board is full.
