@@ -148,9 +148,15 @@ namespace bit {
          * @return the bitboard layer of the
          * given alliance
          */
+#       define TERN_ON_X(A, Q, R) A == X? Q: R
+
         template<Alliance A>
         constexpr uint16_t get()
-        { return A == X? bbx: bbo; }
+        { return TERN_ON_X(A, bbx, bbo); }
+
+
+#       define LEAVE_MARK(A, I) \
+        TERN_ON_X(A, bbx ^= Squares[I], bbo ^= Squares[I])
 
         /**
          * A function to make or unmake a mark
@@ -160,10 +166,11 @@ namespace bit {
          * @tparam I the square to mark
          */
         template<Alliance A, int I>
+        [[maybe_unused]]
         constexpr void mark() {
             static_assert(A == X || A == O);
             static_assert(I >= 0 && I < BoardLength);
-            A == X? bbx ^= Squares[I]: bbo ^= Squares[I];
+            LEAVE_MARK(A, I);
         }
 
         /**
@@ -177,7 +184,7 @@ namespace bit {
         constexpr void mark(const int i) {
             static_assert(A == X || A == O);
             assert(i >= 0 && i < BoardLength);
-            A == X? bbx ^= Squares[i]: bbo ^= Squares[i];
+            LEAVE_MARK(A, i);
         }
 
         /**
@@ -187,11 +194,16 @@ namespace bit {
         * @param a the Alliance to mark with
         * @param i the square to mark
         */
-        constexpr void mark(const Alliance a, const int i) {
+        [[maybe_unused]] constexpr void
+        mark(const Alliance a, const int i) {
             assert(a == 0 || a == 1);
             assert(i >= 0 && i < BoardLength);
-            a == X? bbx ^= Squares[i]: bbo ^= Squares[i];
+            LEAVE_MARK(a, i);
         }
+
+#       undef LEAVE_MARK
+#       undef TERN_ON_X
+#       define SQUARE_FULL(i) (bbx | bbo) & Squares[i]
 
         /**
          * A method to check if the square at a given
@@ -202,9 +214,10 @@ namespace bit {
          * is empty
          */
         [[maybe_unused]] [[nodiscard]]
-        constexpr bool emptySquare(const int i) const {
+        constexpr bool
+        emptySquare(const int i) const {
             assert(i >= 0 && i < BoardLength);
-            return !((bbx | bbo) & Squares[i]);
+            return !(SQUARE_FULL(i));
         }
 
         /**
@@ -216,17 +229,18 @@ namespace bit {
          * is occupied
          */
         [[nodiscard]]
-        constexpr bool occupiedSquare(const int i) const {
+        constexpr bool
+        occupiedSquare(const int i) const {
             assert(i >= 0 && i < BoardLength);
-            return ((bbx | bbo) & Squares[i]);
+            return SQUARE_FULL(i);
         }
 
-        /**
-         * A method to reset this board to its empty
-         * state.
-         */
-        constexpr void reset()
-        { bbx = bbo = 0; }
+#       undef SQUARE_FULL
+#       define EXTRACT_MAGIC(A)                       \
+        do {                                          \
+            const uint16_t t = A == X? bbx: bbo;      \
+            return Magic[t >> 3U] & (1U << (t & 7U)); \
+        } while(0)
 
         /**
          * A function to determine whether or not
@@ -239,16 +253,7 @@ namespace bit {
         template<Alliance A>
         constexpr bool hasVictory() {
             static_assert(A == X || A == O);
-            const uint16_t t = A == X? bbx: bbo;
-            // Whoops, forgot to update this!
-            // Get the magic constant that corresponds to
-            // this board and intersect with a mask
-            // containing a single high bit at the index
-            // determined by board mod 8. The resulting
-            // 8-bit number will either be zero or a
-            // non-negative integer depending on the
-            // extracted information.
-            return Magic[t >> 3U] & (1U << (t & 7U));
+            EXTRACT_MAGIC(A);
         }
 
         /**
@@ -259,12 +264,13 @@ namespace bit {
          * @param a the Alliance
          * @return whether the alliance has three in a row
          */
-        constexpr bool hasVictory(const Alliance a) {
+        [[maybe_unused]] constexpr bool
+        hasVictory(const Alliance a) {
             assert(a == X || a == O);
-            const uint16_t t = a == X? bbx: bbo;
-            // See overload.
-            return Magic[t >> 3U] & (1U << (t & 7U));
+            EXTRACT_MAGIC(a);
         }
+
+#       undef EXTRACT_MAGIC
 
         /**
          * A method to indicate whether this board is full.
@@ -274,6 +280,14 @@ namespace bit {
         [[nodiscard]]
         constexpr bool isFull() const
         { return (bbx | bbo) == 0x01FF; }
+
+
+        /**
+         * A method to reset this board to its empty
+         * state.
+         */
+        constexpr void reset()
+        { bbx = bbo = 0; }
 
         /**
          * Insertion overload.

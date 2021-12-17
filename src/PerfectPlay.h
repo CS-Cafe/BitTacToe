@@ -1071,6 +1071,8 @@ namespace bit::tab {
             0x271132d8e496cc21
     };
 
+    constexpr uint64_t Mod = 4095ULL;
+
     /**
      * A "hashing by division" hash function.
      *
@@ -1078,7 +1080,7 @@ namespace bit::tab {
      * @return a table index
      */
     constexpr uint64_t hash(const uint16_t k)
-    { return k & 4095ULL; }
+    { return k & Mod; }
 
     /**
      * A "probing" hash function.
@@ -1091,7 +1093,7 @@ namespace bit::tab {
     (const uint16_t k, const int i) {
         return (int)(
             (hash(k) + (i << 1U) + (i << 2U))
-                & 4095ULL
+                & Mod
         );
     }
 }
