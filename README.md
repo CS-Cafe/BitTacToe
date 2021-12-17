@@ -1,11 +1,11 @@
 # Unreasonably Fast Tic Tac Toe 
 
-<h5>*Faster than lightning* - *Faster than Zenitsu in REM.*</h5>
+<h5><i>Faster than lightning - Faster than Zenitsu in REM.</i></h5>
 
 "Yes. It's been done before. In fact, it's been done to death. Let's dare to pick the project
 up one last time... And finish it." 
 
-<h5>***queue the epic music***</h5>
+<h5><b><i>queue the epic music</i></b></h5>
 
 ## *Command Line Interface*
 
