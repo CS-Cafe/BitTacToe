@@ -35,8 +35,8 @@ int main() {
             const long start = clock();
             const int m = probe(hash);
             b.mark<X>(m);
-            hash ^= zobrist<X>(8 - m);
             const long end = clock() - start;
+            hash ^= zobrist<X>(8 - m);
             cout << "\033[2J\033[H" << flush;
             cout << b;
             printf(
