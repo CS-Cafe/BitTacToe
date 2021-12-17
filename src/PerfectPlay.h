@@ -1091,8 +1091,9 @@ namespace bit::tab {
      */
     constexpr int hash
     (const uint16_t k, const int i) {
+        const int u = i << 1U;
         return (int)(
-            (hash(k) + (i << 1U) + (i << 2U))
+            (hash(k) + u + (u << 1U))
                 & Mod
         );
     }
