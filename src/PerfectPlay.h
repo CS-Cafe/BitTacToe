@@ -1129,9 +1129,8 @@ namespace bit::perf {
     (const uint16_t o, const uint16_t x) {
         uint16_t r = o;
         uint16_t c = 0;
-        for(; r; r &= r - 1) {
+        for(; r; r &= r - 1)
             c ^= zO[bitScanFwd(r)];
-        }
         r = x;
         for(; r; r &= r - 1)
             c ^= zX[bitScanFwd(r)];
