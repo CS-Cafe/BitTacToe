@@ -65,5 +65,5 @@ multiplier, please let me know and I'll add you to the project!
 
 ## *Table vs. Alpha-Beta*
 
-![chart](/figures/tictac)
+![chart](/figures/tictac.png)
 
