@@ -161,11 +161,11 @@ namespace bit {
         TERN(A, bbx ^= Squares[I], bbo ^= Squares[I])
 #       define AssertTA \
         static_assert(A == X || A == O)
-#       define AssertTB \
+#       define AssertTI \
         static_assert(I >= 0 && I < BoardLength)
 #       define AssertA \
         assert(a == X || a == O)
-#       define AssertB \
+#       define AssertI \
         assert(i >= 0 && i < BoardLength)
 
         /**
@@ -178,7 +178,7 @@ namespace bit {
         template<Alliance A, int I>
         [[maybe_unused]]
         constexpr void mark()
-        { AssertTA; AssertTB; PLACE_MARK(A, I); }
+        { AssertTA; AssertTI; PLACE_MARK(A, I); }
 
         /**
         * A function to make or unmake a mark
@@ -189,7 +189,7 @@ namespace bit {
         */
         template<Alliance A>
         constexpr void mark(const int i)
-        { AssertTA; AssertB; PLACE_MARK(A, i); }
+        { AssertTA; AssertI; PLACE_MARK(A, i); }
 
         /**
         * A function to make or unmake a mark
@@ -200,7 +200,7 @@ namespace bit {
         */
         [[maybe_unused]] constexpr void
         mark(const Alliance a, const int i)
-        { AssertA; AssertB; PLACE_MARK(a, i); }
+        { AssertA; AssertI; PLACE_MARK(a, i); }
 
 #       undef PLACE_MARK
 #       define SQUARE_FULL(i) (bbx | bbo) & Squares[i]
@@ -216,7 +216,7 @@ namespace bit {
         [[maybe_unused]] [[nodiscard]]
         constexpr bool
         emptySquare(const int i) const
-        { AssertB; return !(SQUARE_FULL(i)); }
+        { AssertI; return !(SQUARE_FULL(i)); }
 
         /**
          * A method to check if the square at a given
@@ -229,11 +229,11 @@ namespace bit {
         [[nodiscard]]
         constexpr bool
         occupiedSquare(const int i) const
-        { AssertB; return SQUARE_FULL(i); }
+        { AssertI; return SQUARE_FULL(i); }
 
 #       undef SQUARE_FULL
-#       undef AssertTB
-#       undef AssertB
+#       undef AssertTI
+#       undef AssertI
 #       define EXTRACT_MAGIC(A)                        \
         do {                                           \
             const uint16_t t = GET_BOARD(A); \
