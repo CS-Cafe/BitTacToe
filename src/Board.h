@@ -142,8 +142,8 @@ namespace bit {
         constexpr Board() : bbx(0), bbo(0)
         { }
 
-#       define TERN_ON_X(A, Q, R) A == X? Q: R
-#       define GET_BOARD(A) TERN_ON_X(A, bbx, bbo)
+#       define TERN(A, Q, R) A == X? Q: R
+#       define GET_BOARD(A) TERN(A, bbx, bbo)
 
         /**
          * A function to get the bitboard layer
@@ -158,8 +158,7 @@ namespace bit {
         { return GET_BOARD(A); }
 
 #       define PLACE_MARK(A, I) \
-        TERN_ON_X               \
-        (A, bbx ^= Squares[I], bbo ^= Squares[I])
+        TERN(A, bbx ^= Squares[I], bbo ^= Squares[I])
 
         /**
          * A function to make or unmake a mark
@@ -273,7 +272,7 @@ namespace bit {
         }
 
 #       undef EXTRACT_MAGIC
-#       undef TERN_ON_X
+#       undef TERN
 #       undef GET_BOARD
 
         /**
