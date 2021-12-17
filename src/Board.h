@@ -52,7 +52,8 @@ namespace bit {
     /**
      * The DeBruijn constant.
      */
-    constexpr uint64_t DeBruijn64 = 0x03F79D71B4CB0A89L;
+    constexpr uint64_t
+    DeBruijn64 = 0x03F79D71B4CB0A89L;
 
     /**
      * The DeBruijn map from hash key to integer
@@ -86,7 +87,8 @@ namespace bit {
     constexpr int bitScanFwd(const uint64_t l) {
         assert(l != 0);
         return DeBruijnTable[(int)
-            (((l & (uint64_t)-(int64_t)l) * DeBruijn64) >> 58U)
+            (((l & (uint64_t)-(int64_t)l)
+            * DeBruijn64) >> 58U)
         ];
     }
 
@@ -140,6 +142,9 @@ namespace bit {
         constexpr Board() : bbx(0), bbo(0)
         { }
 
+#       define TERN_ON_X(A, Q, R) A == X? Q: R
+#       define GET_BOARD(A) TERN_ON_X(A, bbx, bbo)
+
         /**
          * A function to get the bitboard layer
          * of the given alliance.
@@ -148,15 +153,13 @@ namespace bit {
          * @return the bitboard layer of the
          * given alliance
          */
-#       define TERN_ON_X(A, Q, R) A == X? Q: R
-
         template<Alliance A>
         constexpr uint16_t get()
-        { return TERN_ON_X(A, bbx, bbo); }
+        { return GET_BOARD(A); }
 
-
-#       define LEAVE_MARK(A, I) \
-        TERN_ON_X(A, bbx ^= Squares[I], bbo ^= Squares[I])
+#       define PLACE_MARK(A, I) \
+        TERN_ON_X               \
+        (A, bbx ^= Squares[I], bbo ^= Squares[I])
 
         /**
          * A function to make or unmake a mark
@@ -170,7 +173,7 @@ namespace bit {
         constexpr void mark() {
             static_assert(A == X || A == O);
             static_assert(I >= 0 && I < BoardLength);
-            LEAVE_MARK(A, I);
+            PLACE_MARK(A, I);
         }
 
         /**
@@ -184,7 +187,7 @@ namespace bit {
         constexpr void mark(const int i) {
             static_assert(A == X || A == O);
             assert(i >= 0 && i < BoardLength);
-            LEAVE_MARK(A, i);
+            PLACE_MARK(A, i);
         }
 
         /**
@@ -198,11 +201,10 @@ namespace bit {
         mark(const Alliance a, const int i) {
             assert(a == 0 || a == 1);
             assert(i >= 0 && i < BoardLength);
-            LEAVE_MARK(a, i);
+            PLACE_MARK(a, i);
         }
 
-#       undef LEAVE_MARK
-#       undef TERN_ON_X
+#       undef PLACE_MARK
 #       define SQUARE_FULL(i) (bbx | bbo) & Squares[i]
 
         /**
@@ -236,10 +238,10 @@ namespace bit {
         }
 
 #       undef SQUARE_FULL
-#       define EXTRACT_MAGIC(A)                       \
-        do {                                          \
-            const uint16_t t = A == X? bbx: bbo;      \
-            return Magic[t >> 3U] & (1U << (t & 7U)); \
+#       define EXTRACT_MAGIC(A)                        \
+        do {                                           \
+            const uint16_t t = GET_BOARD(A); \
+            return Magic[t >> 3U] & (1U << (t & 7U));  \
         } while(0)
 
         /**
@@ -271,6 +273,8 @@ namespace bit {
         }
 
 #       undef EXTRACT_MAGIC
+#       undef TERN_ON_X
+#       undef GET_BOARD
 
         /**
          * A method to indicate whether this board is full.
