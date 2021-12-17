@@ -71,7 +71,7 @@ namespace opponent {
      *
      * <p>
      * This Tic-Tac-Toe opponent uses miniMax to calculate the best move.
-     * Minimax is a probe algorithm capable of choosing optimal moves in a zero-sum
+     * Minimax is a search algorithm capable of choosing optimal moves in a zero-sum
      * game. A zero-sum game is one in which the respective gains and losses of the
      * two players (or teams) cancel each other out. This property ensures that a
      * loss for one player results in an equivalent gain for the other.
@@ -93,11 +93,11 @@ namespace opponent {
      *
      * <p>
      * This minimax algorithm uses alpha-beta pruning to cut off large portions of
-     * the probe tree that need not be visited. If a part of the tree is guaranteed
+     * the search tree that need not be visited. If a part of the tree is guaranteed
      * to be cut off by a min or max node, then there is no need to look any further.
      * We can make this guarantee by setting the values of variables 'alpha' and 'beta'
      * as a score is returned from a child node up into a parent node. This process
-     * relies on the fact that each probe tree is navigated both iteratively and
+     * relies on the fact that each search tree is navigated both iteratively and
      * recursively. For Example, after returning from a child min-node into a parent
      * max-node, alpha is set, and the algorithm enters the next child min-node. The
      * value that this min-node returns must be between alpha and beta. Beta is now
