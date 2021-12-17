@@ -2,6 +2,9 @@
  
 #### *A lightning-fast tic tac toe project. Faster than Zenitsu in REM.*
 
+Yes. It's been done before. In fact, it's been done to death. Let's dare to pick the project
+up one last time... And finish it.
+
 ## *Command Line Interface*
 
 <pre>
