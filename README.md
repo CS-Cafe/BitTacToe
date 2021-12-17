@@ -63,7 +63,7 @@ multiplier, please let me know and I'll add you to the project!
 
 1 microsecond.
 
-## *Table vs. Alpha-Beta*
+## *Table vs. Alpha-Beta (Seconds)*
 
 ![chart](/figures/tictac.png)
 
