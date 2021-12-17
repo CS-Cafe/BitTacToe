@@ -1091,8 +1091,9 @@ namespace bit::tab {
      */
     constexpr int hash
     (const uint16_t k, const int i) {
+        const int u = i << 1U;
         return (int)(
-            (hash(k) + (i << 1U) + (i << 2U))
+            (hash(k) + u + (u << 1U))
                 & Mod
         );
     }
@@ -1129,9 +1130,8 @@ namespace bit::perf {
     (const uint16_t o, const uint16_t x) {
         uint16_t r = o;
         uint16_t c = 0;
-        for(; r; r &= r - 1) {
+        for(; r; r &= r - 1)
             c ^= zO[bitScanFwd(r)];
-        }
         r = x;
         for(; r; r &= r - 1)
             c ^= zX[bitScanFwd(r)];
@@ -1145,7 +1145,7 @@ namespace bit::perf {
      * @param table a 512x512 table to fill
      * @param b the board to use
      */
-    void mapBestMoves
+    inline void mapBestMoves
     (uint8_t** const t, Board* const b) {
         if(b->isFull() ||
            b->hasVictory<X>() ||
@@ -1176,15 +1176,13 @@ namespace bit::perf {
      * @return the table entry corresponding
      * to the given key
      */
-    uint8_t probe(const uint16_t key) {
-        int i = 0, j = 0;
-        do {
-            j = hash(key, i);
-            if(table[j].key == key)
-                return table[j].payload;
-        } while
-        (table[j].key != 0xffffU && ++i < 4096);
-        return -1;
+    constexpr uint8_t probe(const uint16_t key) {
+        int j;
+        for(int i = 0;
+            table[j = hash(key, i)].
+                key != key;
+                    ++i);
+        return table[j].payload;
     }
 }
 
