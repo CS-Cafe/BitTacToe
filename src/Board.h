@@ -203,7 +203,8 @@ namespace bit {
         { AssertA; AssertI; PLACE_MARK(a, i); }
 
 #       undef PLACE_MARK
-#       define SQUARE_FULL(i) (bbx | bbo) & Squares[i]
+#       define FULL_BOARD (bbx | bbo)
+#       define SQUARE_FULL(i) FULL_BOARD & Squares[i]
 
         /**
          * A method to check if the square at a given
@@ -277,8 +278,9 @@ namespace bit {
          */
         [[nodiscard]]
         constexpr bool isFull() const
-        { return (bbx | bbo) == 0x01FF; }
+        { return FULL_BOARD == 0x01FF; }
 
+#       undef FULL_BOARD
 
         /**
          * A method to reset this board to its empty
