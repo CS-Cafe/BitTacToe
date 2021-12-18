@@ -1180,6 +1180,17 @@ namespace bit::perf {
      * return the table entry corresponding
      * to the given key.
      *
+     * @note
+     * <p>
+     * this function assumes that the given
+     * key exists in the hash table, avoiding
+     * the need for expensive boundary checks.
+     * This function WILL loop infinitely if
+     * you use a key for a board that is not
+     * in the perfect response tree. Proceed
+     * with caution.
+     * </p>
+     *
      * @param key the key to use
      * @return the table entry move corresponding
      * to the given key
