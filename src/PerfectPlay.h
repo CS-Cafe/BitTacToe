@@ -1186,7 +1186,7 @@ namespace bit::perf {
      * key exists in the hash table, avoiding
      * the need for expensive boundary checks.
      * This function WILL loop infinitely if
-     * you use a hash a board that is not
+     * you use a hash key for a board that is not
      * in the perfect response tree that built
      * the hash table. Proceed with caution.
      * </p>
