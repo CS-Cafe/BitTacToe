@@ -14,17 +14,6 @@ namespace bit {
     constexpr uint8_t BoardLength = 9;
 
     /**
-     * Bitboards representing the
-     * individual squares of the
-     * tic-tac-toe board.
-     */
-    constexpr uint16_t Squares[] = {
-            0x0100, 0x0080, 0x0040,
-            0x0020, 0x0010, 0x0008,
-            0x0004, 0x0002, 0x0001
-    };
-
-    /**
      * Magic bitmaps that contain
      * special endgame information
      * for quick access. 512 bits.
