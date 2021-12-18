@@ -1177,7 +1177,7 @@ namespace bit::perf {
      * to the given key
      */
     constexpr uint8_t probe(const uint16_t key) {
-        int j;
+        int j = 0;
         for(int i = 0;
             table[j = hash(key, i)].
                 key != key;

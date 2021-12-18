@@ -1,11 +1,14 @@
 #include <ostream>
 #include <ctime>
+#include <iomanip>
 #include "Board.h"
 #include "PerfectPlay.h"
 
 using namespace bit;
 using namespace perf;
-using std::cout, std::cin, std::flush;
+using std::cout;
+using std::cin;
+using std::flush;
 
 /**
  * Tic Tac Toe
