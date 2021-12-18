@@ -11,7 +11,8 @@
 
 namespace bit {
 
-    constexpr uint8_t BoardLength = 9;
+    constexpr uint8_t BoardLength = 9U;
+    constexpr uint16_t BoardMask = 0x01FFU;
 
     /**
      * Magic bitmaps that contain
@@ -228,7 +229,7 @@ namespace bit {
 #       undef SQUARE
 #       define EXTRACT_MAGIC(A)                        \
         do {                                           \
-            const uint16_t t = GET_BOARD(A); \
+            const uint16_t t = GET_BOARD(A);           \
             return Magic[t >> 3U] & (1U << (t & 7U));  \
         } while(0)
 
@@ -269,7 +270,7 @@ namespace bit {
          */
         [[nodiscard]]
         constexpr bool isFull() const
-        { return FULL_BOARD == 0x01FFU; }
+        { return FULL_BOARD == BoardMask; }
 
 #       undef FULL_BOARD
 
