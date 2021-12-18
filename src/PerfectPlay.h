@@ -33,7 +33,7 @@ namespace bit::tab {
      * <p>
      * We found that a power of two yields much
      * faster probing speeds with no loss of
-     * accuracy. Since our primary goal here 
+     * accuracy. Since our primary goal here
      * is speed, we will ignore the advice of
      * the 1970's engineers and size our table
      * at 4096.
@@ -1109,7 +1109,7 @@ namespace bit::tab {
     constexpr int hash
     (const uint16_t k, const int i) {
         const int u = i << 1U;
-        return (int)(
+        return (int) (
             (hash(k) + u + (u << 1U))
                 & Mod
         );
