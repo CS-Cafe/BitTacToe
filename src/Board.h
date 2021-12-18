@@ -133,7 +133,7 @@ namespace bit {
         { }
 
 #       define TERN(A, Q, R) A == X? Q: R
-#       define GET_BOARD(A) TERN(A, bbx, bbo)
+#       define BOARD(A) TERN(A, bbx, bbo)
 
         /**
          * A function to get the bitboard layer
@@ -145,7 +145,7 @@ namespace bit {
          */
         template<Alliance A>
         constexpr uint16_t get()
-        { return GET_BOARD(A); }
+        { return BOARD(A); }
 
 #       define SQUARE(I) 0x0100U >> I
 #       define PLACE_MARK(A, I) \
@@ -229,7 +229,7 @@ namespace bit {
 #       undef SQUARE
 #       define EXTRACT_MAGIC(A)                        \
         do {                                           \
-            const uint16_t t = GET_BOARD(A);           \
+            const uint16_t t = BOARD(A);               \
             return Magic[t >> 3U] & (1U << (t & 7U));  \
         } while(0)
 
@@ -259,7 +259,7 @@ namespace bit {
 
 #       undef EXTRACT_MAGIC
 #       undef TERN
-#       undef GET_BOARD
+#       undef BOARD
 #       undef ASSERTTA
 #       undef ASSERTA
 
