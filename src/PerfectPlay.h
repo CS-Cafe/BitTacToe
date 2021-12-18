@@ -10,12 +10,12 @@
 namespace bit::tab {
 
     /**
-     * An entry has a key and a payload.
+     * An entry has a key and a move.
      * An entry is an immutable aggregate.
      */
     struct Entry final {
         const uint16_t key;
-        const uint8_t payload;
+        const uint8_t move;
     };
 
     /**
@@ -1091,15 +1091,6 @@ namespace bit::tab {
     constexpr uint64_t Mod = 4095ULL;
 
     /**
-     * A "hashing by division" hash function.
-     *
-     * @param k the hash key
-     * @return a table index
-     */
-    constexpr uint64_t hash(const uint16_t k)
-    { return k & Mod; }
-
-    /**
      * A "probing" hash function.
      *
      * @param k the key
@@ -1110,7 +1101,7 @@ namespace bit::tab {
     (const uint16_t k, const int i) {
         const int u = i << 1U;
         return (int) (
-            (hash(k) + u + (u << 1U))
+            ((k & Mod) + u + (u << 1U))
                 & Mod
         );
     }
@@ -1190,7 +1181,7 @@ namespace bit::perf {
      * to the given key.
      *
      * @param key the key to use
-     * @return the table entry corresponding
+     * @return the table entry move corresponding
      * to the given key
      */
     constexpr uint8_t probe(const uint16_t key) {
@@ -1199,7 +1190,7 @@ namespace bit::perf {
             table[j = hash(key, i)].
                 key != key;
                     ++i);
-        return table[j].payload;
+        return table[j].move;
     }
 }
 
