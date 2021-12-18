@@ -13,10 +13,8 @@ namespace bit::tab {
      * An entry has a key and a move.
      * An entry is an immutable aggregate.
      */
-    struct Entry final {
-        const uint16_t key;
-        const uint8_t move;
-    };
+    struct Entry final
+    { const uint16_t key; const uint8_t move; };
 
     /**
      * An open-addressed hash table to map the
@@ -1196,12 +1194,11 @@ namespace bit::perf {
      * to the given key
      */
     constexpr uint8_t probe(const uint16_t key) {
-        int j = 0;
+        const Entry* e = nullptr;
         for(int i = 0;
-            table[j = hash(key, i)].
-                key != key;
-                    ++i);
-        return table[j].move;
+            (e = &table[hash(key, i)])
+                ->key != key; ++i);
+        return e->move;
     }
 }
 
