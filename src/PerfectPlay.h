@@ -21,6 +21,22 @@ namespace bit::tab {
     /**
      * An open-addressed hash table to map the
      * current board to a best move.
+     *
+     * <p>
+     * Most textbooks are adamant that a hash
+     * table size should be a prime some distance
+     * from a power of two. However, hardware has
+     * changed quite a bit since these textbooks
+     * were written.
+     * </p>
+     *
+     * <p>
+     * We found that a prime yields much slower
+     * probing speeds than a power of two.
+     * Since our primary goal here is speed, we
+     * will ignore the advice of the 1970's
+     * mathematicians and size our table at 4096.
+     * </p>
      */
     constexpr Entry table[4096] = {
             {0xd000U,  3U},{0xffffU,255U},{0xffffU,255U},{0xb003U,  2U},
