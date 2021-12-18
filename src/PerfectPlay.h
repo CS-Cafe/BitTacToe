@@ -31,11 +31,12 @@ namespace bit::tab {
      * </p>
      *
      * <p>
-     * We found that a prime yields much slower
-     * probing speeds than a power of two.
-     * Since our primary goal here is speed, we
-     * will ignore the advice of the 1970's
-     * mathematicians and size our table at 4096.
+     * We found that a power of two yields much
+     * faster probing speeds with no loss of
+     * accuracy. Since our primary goal here 
+     * is speed, we will ignore the advice of
+     * the 1970's engineers and size our table
+     * at 4096.
      * </p>
      */
     constexpr Entry table[4096] = {
