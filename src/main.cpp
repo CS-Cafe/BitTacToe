@@ -11,7 +11,7 @@ using std::cin;
 using std::flush;
 
 /**
- * Tic Tac Toe
+ * 5-min Tic Tac Toe. Please don't judge ':D
  */
 int main() {
     Board b; char c; int i = -1; bool x, o;
