@@ -1086,7 +1086,7 @@ namespace bit::tab {
             0x271132d8e496cc21
     };
 
-    constexpr uint64_t Mod = 4095ULL;
+    constexpr uint16_t ModMask = 4095ULL;
 
     /**
      * A "probing" hash function.
@@ -1095,12 +1095,12 @@ namespace bit::tab {
      * @param i the offset
      * @return a table index
      */
-    constexpr int hash
+    constexpr uint16_t hash
     (const uint16_t k, const int i) {
         const int u = i << 1U;
         return (int) (
-            ((k & Mod) + u + (u << 1U))
-                & Mod
+            ((k & ModMask) + u + (u << 1U))
+                & ModMask
         );
     }
 }
@@ -1196,7 +1196,7 @@ namespace bit::perf {
     constexpr uint8_t probe(const uint16_t key) {
         const Entry* e = nullptr;
         for(int i = 0;
-            (e = &table[hash(key, i)])
+            (e = (table + hash(key, i)))
                 ->key != key; ++i);
         return e->move;
     }
