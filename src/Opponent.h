@@ -109,8 +109,8 @@ namespace opponent {
     inline int chooseMove(Board *const b) {
         using oa::alphaOmega;
         int bestMove = -1,
-                maxScore = INT8_MIN,
-                currentScore;
+            maxScore = INT8_MIN,
+            currentScore;
         for (int i = 0; i < BoardLength; ++i) {
             if (b->occupiedSquare(i)) continue;
             b->mark<X>(i);
