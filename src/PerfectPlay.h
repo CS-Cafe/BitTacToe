@@ -1133,12 +1133,12 @@ namespace bit::perf {
      */
     [[maybe_unused]]
     constexpr uint16_t zobrist
-    (const uint16_t o, const uint16_t x) {
-        uint16_t r = o;
+    (Board* const b) {
+        uint16_t r = b->get<O>();
         uint16_t c = 0;
         for(; r; r &= r - 1)
             c ^= zO[bitScanFwd(r)];
-        r = x;
+        r = b->get<X>();
         for(; r; r &= r - 1)
             c ^= zX[bitScanFwd(r)];
         return c;
