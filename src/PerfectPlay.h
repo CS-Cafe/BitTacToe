@@ -1180,13 +1180,10 @@ namespace bit::perf {
      *
      * @note
      * <p>
+     * If DNDEBUG is specified...
      * this function assumes that the given
      * key exists in the hash table, avoiding
      * the need for expensive boundary checks.
-     * This function WILL loop infinitely if
-     * you use a hash key for a board that is not
-     * in the perfect response tree that built
-     * the hash table. Proceed with caution.
      * </p>
      *
      * @param key the key to use
@@ -1197,7 +1194,11 @@ namespace bit::perf {
         const Entry* e = nullptr;
         for(int i = 0;
             (e = (table + hash(key, i)))
-                ->key != key; ++i);
+                ->key != key
+#               ifndef NDEBUG
+                    && i < 4096
+#               endif
+                        ; ++i);
         return e->move;
     }
 }
