@@ -54,7 +54,7 @@ These perfect moves are precalculated at startup and stored in a 12288 byte tabl
 </p>
 
 <p>
-I think that the time and space complexity of the engine can be improved with 
+I think that the time and space complexity of the engine can be improved with minimal
 perfect hashing. However, I was unable to find a multiplier. If you can find a 
 multiplier, please let me know and I'll add you to the project!
 </p>
