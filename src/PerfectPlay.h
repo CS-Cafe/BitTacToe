@@ -1198,7 +1198,7 @@ namespace bit::perf {
 #               ifndef NDEBUG
                     && i < 4096
 #               endif
-                        ; ++i);
+                    ; ++i);
         return e->move;
     }
 }
