@@ -10,17 +10,32 @@
 namespace bit::tab {
 
     /**
-     * An entry has a key and a payload.
+     * An entry has a key and a move.
      * An entry is an immutable aggregate.
      */
-    struct Entry final {
-        const uint16_t key;
-        const uint8_t payload;
-    };
+    struct Entry final
+    { const uint16_t key; const uint8_t move; };
 
     /**
      * An open-addressed hash table to map the
      * current board to a best move.
+     *
+     * <p>
+     * Most textbooks are adamant that a hash
+     * table size should be a prime some distance
+     * from a power of two. However, hardware has
+     * changed quite a bit since these textbooks
+     * were written.
+     * </p>
+     *
+     * <p>
+     * We found that a power of two yields much
+     * faster probing speeds with no loss of
+     * accuracy. Since our primary goal here
+     * is speed, we will ignore the advice of
+     * the 1970's engineers and size our table
+     * at 4096.
+     * </p>
      */
     constexpr Entry table[4096] = {
             {0xd000U,  3U},{0xffffU,255U},{0xffffU,255U},{0xb003U,  2U},
@@ -1071,16 +1086,7 @@ namespace bit::tab {
             0x271132d8e496cc21
     };
 
-    constexpr uint64_t Mod = 4095ULL;
-
-    /**
-     * A "hashing by division" hash function.
-     *
-     * @param k the hash key
-     * @return a table index
-     */
-    constexpr uint64_t hash(const uint16_t k)
-    { return k & Mod; }
+    constexpr uint16_t ModMask = 4095ULL;
 
     /**
      * A "probing" hash function.
@@ -1089,12 +1095,12 @@ namespace bit::tab {
      * @param i the offset
      * @return a table index
      */
-    constexpr int hash
+    constexpr uint16_t hash
     (const uint16_t k, const int i) {
         const int u = i << 1U;
-        return (int)(
-            (hash(k) + u + (u << 1U))
-                & Mod
+        return (int) (
+            ((k & ModMask) + u + (u << 1U))
+                & ModMask
         );
     }
 }
@@ -1127,12 +1133,12 @@ namespace bit::perf {
      */
     [[maybe_unused]]
     constexpr uint16_t zobrist
-    (const uint16_t o, const uint16_t x) {
-        uint16_t r = o;
+    (Board* const b) {
+        uint16_t r = b->get<O>();
         uint16_t c = 0;
         for(; r; r &= r - 1)
             c ^= zO[bitScanFwd(r)];
-        r = x;
+        r = b->get<X>();
         for(; r; r &= r - 1)
             c ^= zX[bitScanFwd(r)];
         return c;
@@ -1172,17 +1178,28 @@ namespace bit::perf {
      * return the table entry corresponding
      * to the given key.
      *
+     * @note
+     * <p>
+     * If DNDEBUG is specified...
+     * this function assumes that the given
+     * key exists in the hash table, avoiding
+     * the need for expensive boundary checks.
+     * </p>
+     *
      * @param key the key to use
-     * @return the table entry corresponding
+     * @return the table entry move corresponding
      * to the given key
      */
     constexpr uint8_t probe(const uint16_t key) {
-        int j;
+        const Entry* e = nullptr;
         for(int i = 0;
-            table[j = hash(key, i)].
-                key != key;
-                    ++i);
-        return table[j].payload;
+            (e = (table + hash(key, i)))
+                ->key != key
+#               ifndef NDEBUG
+                    && i < 4096
+#               endif
+                    ; ++i);
+        return e->move;
     }
 }
 

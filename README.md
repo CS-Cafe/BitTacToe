@@ -29,8 +29,8 @@ up one last time... And finish it."
 
 <p>
 A perfect-play tic tac toe engine plays a game with no errors. The game will never yield a
-win for the user. A perfect-play engine is based on Turing's Minimax algorithm. This engine
-is a perfect-play engine.
+win for the user. A perfect-play engine is based on the classical Minimax algorithm. This 
+engine is a perfect-play engine.
 </p> 
 
 ## *Compact Bit Board Representation*
@@ -54,12 +54,17 @@ These perfect moves are precalculated at startup and stored in a 12288 byte tabl
 </p>
 
 <p>
-I think that the time and space complexity of the engine can be improved with 
-perfect hashing. However, I was unable to find a multiplier. If you can find a 
-multiplier, please let me know and I'll add you to the project!
+I think that the time and space complexity of the engine can be improved with minimal
+perfect hashing. However, I was unable to find an easy method (not enough time on my 
+hands, unfortunately). If you can find a method, please let me know and I'll add you 
+to the project!
 </p>
 
 ## *Average Best Move Calculation Time*
 
 1 microsecond.
+
+## *Table vs. Alpha-Beta (In seconds, from home position)*
+
+![chart](/figures/tictac.png)
 

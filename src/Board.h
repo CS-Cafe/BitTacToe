@@ -11,18 +11,8 @@
 
 namespace bit {
 
-    constexpr uint8_t BoardLength = 9;
-
-    /**
-     * Bitboards representing the
-     * individual squares of the
-     * tic-tac-toe board.
-     */
-    constexpr uint16_t Squares[] = {
-            0x0100, 0x0080, 0x0040,
-            0x0020, 0x0010, 0x0008,
-            0x0004, 0x0002, 0x0001
-    };
+    constexpr uint8_t BoardLength = 9U;
+    constexpr uint16_t BoardMask = 0x01FFU;
 
     /**
      * Magic bitmaps that contain
@@ -143,7 +133,7 @@ namespace bit {
         { }
 
 #       define TERN(A, Q, R) A == X? Q: R
-#       define GET_BOARD(A) TERN(A, bbx, bbo)
+#       define BOARD(A) TERN(A, bbx, bbo)
 
         /**
          * A function to get the bitboard layer
@@ -155,17 +145,18 @@ namespace bit {
          */
         template<Alliance A>
         constexpr uint16_t get()
-        { return GET_BOARD(A); }
+        { return BOARD(A); }
 
+#       define SQUARE(I) 0x0100U >> I
 #       define PLACE_MARK(A, I) \
-        TERN(A, bbx ^= Squares[I], bbo ^= Squares[I])
-#       define AssertTA \
+        TERN(A, bbx ^= SQUARE(I), bbo ^= SQUARE(I))
+#       define ASSERTTA \
         static_assert(A == X || A == O)
-#       define AssertTI \
+#       define ASSERTTI \
         static_assert(I >= 0 && I < BoardLength)
-#       define AssertA \
+#       define ASSERTA \
         assert(a == X || a == O)
-#       define AssertI \
+#       define ASSERTI \
         assert(i >= 0 && i < BoardLength)
 
         /**
@@ -178,7 +169,7 @@ namespace bit {
         template<Alliance A, int I>
         [[maybe_unused]]
         constexpr void mark()
-        { AssertTA; AssertTI; PLACE_MARK(A, I); }
+        { ASSERTTA; ASSERTTI; PLACE_MARK(A, I); }
 
         /**
         * A function to make or unmake a mark
@@ -189,7 +180,7 @@ namespace bit {
         */
         template<Alliance A>
         constexpr void mark(const int i)
-        { AssertTA; AssertI; PLACE_MARK(A, i); }
+        { ASSERTTA; ASSERTI; PLACE_MARK(A, i); }
 
         /**
         * A function to make or unmake a mark
@@ -200,10 +191,11 @@ namespace bit {
         */
         [[maybe_unused]] constexpr void
         mark(const Alliance a, const int i)
-        { AssertA; AssertI; PLACE_MARK(a, i); }
+        { ASSERTA; ASSERTI; PLACE_MARK(a, i); }
 
 #       undef PLACE_MARK
-#       define SQUARE_FULL(i) (bbx | bbo) & Squares[i]
+#       define FULL_BOARD (bbx | bbo)
+#       define SQUARE_FULL(I) FULL_BOARD & SQUARE(I)
 
         /**
          * A method to check if the square at a given
@@ -216,7 +208,7 @@ namespace bit {
         [[maybe_unused]] [[nodiscard]]
         constexpr bool
         emptySquare(const int i) const
-        { AssertI; return !(SQUARE_FULL(i)); }
+        { ASSERTI; return !(SQUARE_FULL(i)); }
 
         /**
          * A method to check if the square at a given
@@ -229,14 +221,15 @@ namespace bit {
         [[nodiscard]]
         constexpr bool
         occupiedSquare(const int i) const
-        { AssertI; return SQUARE_FULL(i); }
+        { ASSERTI; return SQUARE_FULL(i); }
 
 #       undef SQUARE_FULL
-#       undef AssertTI
-#       undef AssertI
+#       undef ASSERTTI
+#       undef ASSERTI
+#       undef SQUARE
 #       define EXTRACT_MAGIC(A)                        \
         do {                                           \
-            const uint16_t t = GET_BOARD(A); \
+            const uint16_t t = BOARD(A);               \
             return Magic[t >> 3U] & (1U << (t & 7U));  \
         } while(0)
 
@@ -250,7 +243,7 @@ namespace bit {
          */
         template<Alliance A>
         constexpr bool hasVictory()
-        { AssertTA; EXTRACT_MAGIC(A); }
+        { ASSERTTA; EXTRACT_MAGIC(A); }
 
         /**
          * A function to determine whether or not
@@ -262,13 +255,13 @@ namespace bit {
          */
         [[maybe_unused]] constexpr bool
         hasVictory(const Alliance a)
-        { AssertA; EXTRACT_MAGIC(a); }
+        { ASSERTA; EXTRACT_MAGIC(a); }
 
 #       undef EXTRACT_MAGIC
 #       undef TERN
-#       undef GET_BOARD
-#       undef AssertTA
-#       undef AssertA
+#       undef BOARD
+#       undef ASSERTTA
+#       undef ASSERTA
 
         /**
          * A method to indicate whether this board is full.
@@ -277,8 +270,9 @@ namespace bit {
          */
         [[nodiscard]]
         constexpr bool isFull() const
-        { return (bbx | bbo) == 0x01FF; }
+        { return FULL_BOARD == BoardMask; }
 
+#       undef FULL_BOARD
 
         /**
          * A method to reset this board to its empty

@@ -4,4 +4,5 @@
 CMakeFiles/BitTacToe.dir/src/main.cpp.obj: \
  ../src/Board.h \
  ../src/Opponent.h \
+ ../src/PerfectPlay.h \
  ../src/main.cpp

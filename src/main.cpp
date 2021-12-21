@@ -1,14 +1,17 @@
 #include <ostream>
 #include <ctime>
+#include <iomanip>
 #include "Board.h"
 #include "PerfectPlay.h"
 
 using namespace bit;
 using namespace perf;
-using std::cout, std::cin, std::flush;
+using std::cout;
+using std::cin;
+using std::flush;
 
 /**
- * Tic Tac Toe
+ * 5-min Tic Tac Toe. Please don't judge ':D
  */
 int main() {
     Board b; char c; int i = -1; bool x, o;
@@ -35,8 +38,8 @@ int main() {
             const long start = clock();
             const int m = probe(hash);
             b.mark<X>(m);
-            hash ^= zobrist<X>(8 - m);
             const long end = clock() - start;
+            hash ^= zobrist<X>(8 - m);
             cout << "\033[2J\033[H" << flush;
             cout << b;
             printf(
